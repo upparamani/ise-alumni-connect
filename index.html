@@ -40,6 +40,9 @@
           </div>
         </div>
         <div class="flex flex-wrap items-center gap-2.5 self-end md:self-auto">
+          <button onclick="openModal('rebootModal')" class="bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-400/40 font-semibold px-3 py-2 rounded-lg text-xs sm:text-sm transition-all flex items-center gap-1.5 shadow-sm">
+            🌱 Career Reboot & Referrals
+          </button>
           <button onclick="openModal('admissionModal')" class="bg-amber-400/20 hover:bg-amber-400/30 text-amber-300 border border-amber-400/40 font-semibold px-3 py-2 rounded-lg text-xs sm:text-sm transition-all flex items-center gap-1.5 shadow-sm">
             🎓 KLS Admission Benefits
           </button>
@@ -70,8 +73,8 @@
   <div class="bg-gradient-to-r from-amber-500 via-amber-600 to-brand-800 text-slate-950 py-2.5 px-4 shadow-sm">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs sm:text-sm font-semibold">
       <div class="flex items-center gap-2 text-white">
-        <span class="bg-white/20 text-white px-2 py-0.5 rounded text-xs uppercase font-bold">New Initiative</span>
-        <span>KLS Educational Trust Kinship & Admission Guidance Program across KLS Institutions.</span>
+        <span class="bg-white/20 text-white px-2 py-0.5 rounded text-xs uppercase font-bold">New Policy</span>
+        <span>KLS Educational Trust Kinship & Admission Concession Program across KLS Institutions.</span>
       </div>
       <button onclick="openModal('admissionModal')" class="bg-white hover:bg-slate-100 text-slate-900 px-3 py-1 rounded-md text-xs font-bold shadow-xs transition">
         View Admission Benefits & Sister Concerns &rarr;
@@ -82,17 +85,21 @@
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full">
     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-5 mb-6">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-3.5">
-        <div class="md:col-span-5 relative">
+        <div class="md:col-span-4 relative">
           <input type="text" id="searchInput" oninput="render()" placeholder="Search by name, company, domain, or location..." class="w-full pl-4 pr-4 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
+        </div>
+        <div class="md:col-span-3">
+          <select id="domainFilter" onchange="render()" class="w-full py-2 px-3 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white">
+            <option value="ALL">All Sectors & Domains</option>
+            <option value="TECH">Software, Cloud & AI</option>
+            <option value="INDUSTRIAL">Industrial IoT & Manufacturing (Foundry/Auto)</option>
+            <option value="AGRI">Agri-Tech & Rural Business</option>
+            <option value="ACADEMIA">Higher Education & Research</option>
+          </select>
         </div>
         <div class="md:col-span-3">
           <select id="batchFilter" onchange="render()" class="w-full py-2 px-3 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white">
             <option value="ALL">All Batches (Chronological)</option>
-          </select>
-        </div>
-        <div class="md:col-span-2">
-          <select id="countryFilter" onchange="render()" class="w-full py-2 px-3 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white">
-            <option value="ALL">All Countries</option>
           </select>
         </div>
         <div class="md:col-span-2">
@@ -128,10 +135,60 @@
     <div id="viewContainer"></div>
   </main>
 
+  <div id="rebootModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl relative border border-slate-100 max-h-[92vh] overflow-y-auto">
+      <button onclick="closeModal('rebootModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-lg">✕</button>
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-2xl font-bold">🌱</div>
+        <div>
+          <h3 class="font-bold text-slate-900 text-lg">Career Reboot, Upskilling & Referral Support</h3>
+          <p class="text-xs text-slate-500">Confidential, stigma-free assistance for alumni in career transition or returning to tech.</p>
+        </div>
+      </div>
+      <div class="space-y-3.5 text-xs text-slate-700">
+        <div class="p-3.5 rounded-xl bg-emerald-50/70 border border-emerald-200">
+          <h4 class="font-bold text-slate-900 text-sm">👩‍💻 Women in Tech: Returnship Track</h4>
+          <p class="text-slate-600 mt-1">If you took a career break due to family, marriage, or maternity and wish to re-enter technology, our established senior women alumni provide 1-on-1 resume reviews and technical mock interviews in complete privacy.</p>
+        </div>
+        <div class="p-3.5 rounded-xl bg-blue-50/70 border border-blue-200">
+          <h4 class="font-bold text-slate-900 text-sm">🤝 Confidential Internal Referral Exchange</h4>
+          <p class="text-slate-600 mt-1">Looking for a new role? Your employment status is <strong>never</strong> displayed publicly. Submit your resume through our private coordinator desk to be shared directly with hiring alumni leads in Bengaluru, Pune, and Belagavi.</p>
+        </div>
+        <div class="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200">
+          <h4 class="font-bold text-slate-900 text-sm">🏢 Local Belagavi & Remote Tech Opportunities</h4>
+          <p class="text-slate-600 mt-1">For alumni who relocated back to Belagavi, we connect you with local tech firms (Quanteon, Vayavya, Foundry IT) and remote developer contracts shared by alumni founders.</p>
+        </div>
+      </div>
+
+      <div class="mt-5 border-t border-slate-200 pt-4">
+        <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider mb-2">Request Confidential Career / Referral Support</h4>
+        <form onsubmit="handleRebootRequest(event)" class="space-y-2.5 text-xs">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div><label class="block font-semibold text-slate-700 mb-1">Your Name *</label><input type="text" id="rebName" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
+            <div><label class="block font-semibold text-slate-700 mb-1">Graduation Batch *</label><input type="text" id="rebBatch" placeholder="e.g., 2016-2020" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
+            <div><label class="block font-semibold text-slate-700 mb-1">Confidential Contact *</label><input type="text" id="rebContact" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
+            <div><label class="block font-semibold text-slate-700 mb-1">Support Needed *</label>
+              <select id="rebType" class="w-full border border-slate-300 rounded-lg p-2">
+                <option value="Women in Tech Returnship Guidance">Women in Tech: Returnship Guidance</option>
+                <option value="Confidential Alumni Job Referral">Confidential Alumni Job Referral</option>
+                <option value="Local Belagavi Tech Opportunities">Local Belagavi / Remote Tech Roles</option>
+                <option value="Campus Computing Lab Access">Campus Lab Access for Upskilling</option>
+              </select>
+            </div>
+          </div>
+          <div><label class="block font-semibold text-slate-700 mb-1">Core Tech Skills / Resume Link</label><input type="text" id="rebNotes" placeholder="e.g., Java, Python, SQL / Drive Link" class="w-full border border-slate-300 rounded-lg p-2" /></div>
+          <div class="flex justify-end gap-2 pt-2">
+            <button type="button" onclick="closeModal('rebootModal')" class="px-4 py-2 font-medium text-slate-600 hover:bg-slate-100 rounded-lg">Close</button>
+            <button type="submit" class="px-4 py-2 font-semibold text-white bg-emerald-700 hover:bg-emerald-800 rounded-lg shadow-sm">Submit Confidential Request</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <div id="admissionModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative border border-slate-100 max-h-[92vh] overflow-y-auto">
       <button onclick="closeModal('admissionModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-lg">✕</button>
-      
       <div class="flex items-center gap-3 mb-4">
         <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-amber-500 to-amber-600 text-white flex items-center justify-center text-2xl font-bold shadow-sm">🎓</div>
         <div>
@@ -139,12 +196,10 @@
           <p class="text-xs text-slate-500">Educational concessions & priority guidance across Karnataka Law Society institutions.</p>
         </div>
       </div>
-
       <div class="bg-blue-50 border border-blue-200 rounded-xl p-3.5 mb-4 text-xs text-blue-900">
         <p class="font-semibold text-blue-950 mb-1">“Once a Student of KLS GIT, Always Part of the KLS Family.”</p>
         <p>In recognition of alumni contributions to student webinars, mentoring, and department growth, the KLS Educational Trust extends admission assistance and institutional legacy fee concessions for children and immediate family members.</p>
       </div>
-
       <div class="mb-4">
         <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider mb-2">Eligible KLS Sister Concerns & Institutions</h4>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
@@ -156,55 +211,11 @@
           <div class="p-2.5 rounded-lg border border-slate-200 bg-slate-50"><p class="font-bold text-slate-900">6. KLS VDIT, Haliyal</p><p class="text-slate-500 text-[11px]">Engineering & Technology Campus — Haliyal</p></div>
         </div>
       </div>
-
       <div class="space-y-2.5 mb-5 text-xs">
         <h4 class="font-bold text-slate-900 uppercase tracking-wider mb-1">Tiered Privilege Structure</h4>
-        <div class="p-3 rounded-lg border border-amber-200 bg-amber-50/70">
-          <p class="font-bold text-slate-900">Tier 1: Direct Kin (Children of Alumni)</p>
-          <p class="text-slate-600 mt-0.5"><strong>10% to 15% Tuition Concession</strong> under Institutional/Management Quota as an "Alumni Ward Legacy Scholarship", plus priority hostel allotment on campus.</p>
-        </div>
-        <div class="p-3 rounded-lg border border-emerald-200 bg-emerald-50/70">
-          <p class="font-bold text-slate-900">Tier 2: Immediate Siblings (Brothers / Sisters)</p>
-          <p class="text-slate-600 mt-0.5"><strong>5% to 10% Concession</strong> on tuition or flexible semester fee installment options across KLS degree and PU programs.</p>
-        </div>
-        <div class="p-3 rounded-lg border border-purple-200 bg-purple-50/70">
-          <p class="font-bold text-slate-900">Tier 3: Alumni Referrals & Counseling Desk</p>
-          <p class="text-slate-600 mt-0.5">Direct 1-on-1 admission counseling with senior faculty, fast-track document processing, and zero application fee for institutional quota.</p>
-        </div>
-      </div>
-
-      <div class="border-t border-slate-200 pt-4">
-        <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider mb-2">Request Admission Guidance / Department Endorsement</h4>
-        <form onsubmit="handleAdmissionRequest(event)" class="space-y-3 text-xs">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div><label class="block font-semibold text-slate-700 mb-1">Alumnus Name *</label><input type="text" id="admAlumniName" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
-            <div><label class="block font-semibold text-slate-700 mb-1">Graduation Batch *</label><input type="text" id="admBatch" placeholder="e.g., 2012-2016" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
-            <div><label class="block font-semibold text-slate-700 mb-1">Prospective Student's Name *</label><input type="text" id="admStudentName" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
-            <div><label class="block font-semibold text-slate-700 mb-1">Relationship *</label>
-              <select id="admRelation" class="w-full border border-slate-300 rounded-lg p-2">
-                <option value="Child (Son/Daughter)">Child (Son / Daughter)</option>
-                <option value="Sibling (Brother/Sister)">Sibling (Brother / Sister)</option>
-                <option value="Relative / Close Referral">Relative / Close Referral</option>
-              </select>
-            </div>
-            <div><label class="block font-semibold text-slate-700 mb-1">Target Institution *</label>
-              <select id="admTargetInst" class="w-full border border-slate-300 rounded-lg p-2">
-                <option value="KLS GIT (Engineering/MTech/MBA/MCA)">KLS GIT Belagavi (Engineering/MBA/MCA)</option>
-                <option value="KLS IMER (MBA)">KLS IMER Belagavi (MBA)</option>
-                <option value="KLS RL Law College (LL.B)">KLS RL Law College Belagavi</option>
-                <option value="KLS GCC / PU (B.Com/BBA/BCA/PU)">KLS Gogte College of Commerce / PU</option>
-                <option value="KLS Public School / High School">KLS Schools (Belagavi)</option>
-                <option value="KLS VDIT Haliyal">KLS VDIT Haliyal</option>
-              </select>
-            </div>
-            <div><label class="block font-semibold text-slate-700 mb-1">Phone / WhatsApp *</label><input type="text" id="admPhone" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
-          </div>
-          <div><label class="block font-semibold text-slate-700 mb-1">Course Interested In & Notes</label><input type="text" id="admCourse" placeholder="e.g., B.E. Computer Science, MBA, 11th Science" class="w-full border border-slate-300 rounded-lg p-2" /></div>
-          <div class="flex justify-end gap-2 pt-2">
-            <button type="button" onclick="closeModal('admissionModal')" class="px-4 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 rounded-lg">Close</button>
-            <button type="submit" class="px-4 py-2 text-xs font-semibold text-white bg-amber-600 hover:bg-amber-700 rounded-lg">Submit Endorsement Request</button>
-          </div>
-        </form>
+        <div class="p-3 rounded-lg border border-amber-200 bg-amber-50/70"><p class="font-bold text-slate-900">Tier 1: Direct Kin (Children of Alumni)</p><p class="text-slate-600 mt-0.5"><strong>10% to 15% Tuition Concession</strong> under Institutional Quota as a Legacy Scholarship, plus priority hostel allotment on campus.</p></div>
+        <div class="p-3 rounded-lg border border-emerald-200 bg-emerald-50/70"><p class="font-bold text-slate-900">Tier 2: Immediate Siblings (Brothers / Sisters)</p><p class="text-slate-600 mt-0.5"><strong>5% to 10% Concession</strong> on tuition or flexible semester fee installment options across KLS degree and PU programs.</p></div>
+        <div class="p-3 rounded-lg border border-purple-200 bg-purple-50/70"><p class="font-bold text-slate-900">Tier 3: Alumni Referrals & Counseling Desk</p><p class="text-slate-600 mt-0.5">Direct 1-on-1 admission counseling with senior faculty, fast-track document processing, and zero application fee for institutional quota.</p></div>
       </div>
     </div>
   </div>
@@ -221,8 +232,8 @@
       </div>
       <div class="space-y-3 text-xs text-slate-700">
         <div class="p-3 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 cursor-pointer" onclick="closeModal('perksModal'); openModal('admissionModal');">
-          <h4 class="font-bold text-slate-900 text-sm">🎓 KLS Trust Kinship & Admission Concessions (Click for Details)</h4>
-          <p class="text-slate-600 mt-0.5">Tuition concessions and priority admission guidance for family across KLS GIT, IMER, Law College, GCC, and Schools.</p>
+          <h4 class="font-bold text-slate-900 text-sm">🎓 KLS Trust Kinship & Admission Concessions</h4>
+          <p class="text-slate-600 mt-0.5">Tuition concessions and priority admission guidance across KLS GIT, IMER, Law College, GCC, and Schools.</p>
         </div>
         <div class="p-3 rounded-xl bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200">
           <h4 class="font-bold text-slate-900 text-sm">🎟️ AURA National Cultural Fest — VIP Alumni Passes</h4>
@@ -232,18 +243,8 @@
           <h4 class="font-bold text-slate-900 text-sm">🏢 Campus Executive Guest House Stay & Dining</h4>
           <p class="text-slate-600 mt-0.5">Complimentary 1–2 Days Stay at the GIT VIP Guest House when visiting for campus talks or judging.</p>
         </div>
-        <div class="p-3 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200">
-          <h4 class="font-bold text-slate-900 text-sm">🎯 Direct Talent Pipeline & Campus Hiring Priority</h4>
-          <p class="text-slate-600 mt-0.5">Priority campus placement access to hire pre-final and final-year ISE students for internships.</p>
-        </div>
-        <div class="p-3 rounded-xl bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200">
-          <h4 class="font-bold text-slate-900 text-sm">📜 Department Advisory Board (DAB) / BoS Recognition</h4>
-          <p class="text-slate-600 mt-0.5">Formal certificate of appreciation from Principal & HoD, and inclusion in curriculum advisory consultations.</p>
-        </div>
       </div>
-      <div class="mt-5 flex justify-end">
-        <button onclick="closeModal('perksModal')" class="px-4 py-2 text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-lg">Got It</button>
-      </div>
+      <div class="mt-4 flex justify-end"><button onclick="closeModal('perksModal')" class="px-4 py-2 text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-lg">Got It</button></div>
     </div>
   </div>
 
@@ -257,31 +258,29 @@
           <p class="text-xs text-slate-500" id="modalAlumniRole">Role & Company</p>
         </div>
       </div>
-      <form onsubmit="handleConnectSubmit(event)">
-        <div class="space-y-3 text-sm">
-          <div>
-            <label class="block text-xs font-semibold text-slate-600 mb-1">Interaction Intent</label>
-            <select id="connectIntent" class="w-full border border-slate-300 rounded-lg p-2 text-xs">
-              <option value="Department Guest Lecture / Webinar">Invite for Department Guest Lecture / Webinar</option>
-              <option value="In-Person Campus Session (50 Km / 100 Km Club)">In-Person Campus Session / Hackathon Judge (Local / Regional)</option>
-              <option value="Student Career & Placement Mentorship">Student Career & Placement Mentorship</option>
-              <option value="Final Year Project Review / Judge">Project Review / Hackathon Judge</option>
-            </select>
-          </div>
-          <div><label class="block text-xs font-semibold text-slate-600 mb-1">Your Name & Role</label><input type="text" id="connectSender" class="w-full border border-slate-300 rounded-lg p-2 text-xs" required /></div>
-          <div><label class="block text-xs font-semibold text-slate-600 mb-1">Your Contact</label><input type="text" id="connectContact" class="w-full border border-slate-300 rounded-lg p-2 text-xs" required /></div>
-          <div><label class="block text-xs font-semibold text-slate-600 mb-1">Proposed Topic / Message</label><textarea id="connectMessage" rows="3" class="w-full border border-slate-300 rounded-lg p-2 text-xs" required></textarea></div>
+      <form onsubmit="handleConnectSubmit(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-semibold text-slate-600 mb-1">Interaction Intent</label>
+          <select id="connectIntent" class="w-full border border-slate-300 rounded-lg p-2">
+            <option value="Department Guest Lecture / Webinar">Invite for Department Guest Lecture / Webinar</option>
+            <option value="In-Person Campus Session (50 Km / 100 Km Club)">In-Person Campus Session / Hackathon Judge (Local / Regional)</option>
+            <option value="Student Career & Placement Mentorship">Student Career & Placement Mentorship</option>
+            <option value="Final Year Project Review / Judge">Project Review / Hackathon Judge</option>
+          </select>
         </div>
+        <div><label class="block font-semibold text-slate-600 mb-1">Your Name & Role</label><input type="text" id="connectSender" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
+        <div><label class="block font-semibold text-slate-600 mb-1">Your Contact</label><input type="text" id="connectContact" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
+        <div><label class="block font-semibold text-slate-600 mb-1">Proposed Topic / Message</label><textarea id="connectMessage" rows="3" class="w-full border border-slate-300 rounded-lg p-2" required></textarea></div>
         <div class="mt-4 flex justify-end gap-2">
-          <button type="button" onclick="closeModal('connectModal')" class="px-4 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 rounded-lg">Cancel</button>
-          <button type="submit" class="px-4 py-2 text-xs font-semibold text-white bg-brand-700 hover:bg-brand-800 rounded-lg">Send Request</button>
+          <button type="button" onclick="closeModal('connectModal')" class="px-4 py-2 font-medium text-slate-600 hover:bg-slate-100 rounded-lg">Cancel</button>
+          <button type="submit" class="px-4 py-2 font-semibold text-white bg-brand-700 hover:bg-brand-800 rounded-lg">Send Request</button>
         </div>
       </form>
     </div>
   </div>
 
   <div id="registerModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl relative border border-slate-100 max-h-[90vh] overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl relative border border-slate-100 max-h-[92vh] overflow-y-auto">
       <button onclick="closeModal('registerModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-lg">✕</button>
       <div class="mb-4">
         <h3 class="font-bold text-slate-900 text-lg">ISE Alumni Registration Form</h3>
@@ -290,23 +289,44 @@
       <form onsubmit="handleRegisterSubmit(event)">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
           <div class="sm:col-span-2"><label class="block font-semibold text-slate-700 mb-1">Full Name *</label><input type="text" id="regName" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
-          <div><label class="block font-semibold text-slate-700 mb-1">USN</label><input type="text" id="regUSN" class="w-full border border-slate-300 rounded-lg p-2" /></div>
+          <div><label class="block font-semibold text-slate-700 mb-1">USN</label><input type="text" id="regUSN" placeholder="e.g., 2GI15IS001" class="w-full border border-slate-300 rounded-lg p-2" /></div>
           <div><label class="block font-semibold text-slate-700 mb-1">Graduation Batch *</label><input type="text" id="regBatch" placeholder="e.g., 2017-2021" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
-          <div><label class="block font-semibold text-slate-700 mb-1">Job Title *</label><input type="text" id="regTitle" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
-          <div><label class="block font-semibold text-slate-700 mb-1">Organization *</label><input type="text" id="regCompany" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
-          <div><label class="block font-semibold text-slate-700 mb-1">City *</label><input type="text" id="regCity" placeholder="Belagavi / Bengaluru / Sydney" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
+          <div><label class="block font-semibold text-slate-700 mb-1">Current Job Title / Profession *</label><input type="text" id="regTitle" placeholder="e.g., Tech Lead / Entrepreneur / Researcher" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
+          <div><label class="block font-semibold text-slate-700 mb-1">Organization / Enterprise *</label><input type="text" id="regCompany" placeholder="e.g., Pelatro / Belagavi Foundry / Self" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
+          <div><label class="block font-semibold text-slate-700 mb-1">City *</label><input type="text" id="regCity" placeholder="Belagavi / Hubballi / Sydney" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
           <div><label class="block font-semibold text-slate-700 mb-1">Country *</label><input type="text" id="regCountry" placeholder="India / Netherlands / Australia" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
-          <div class="sm:col-span-2"><label class="block font-semibold text-slate-700 mb-1">LinkedIn URL</label><input type="url" id="regLinkedin" class="w-full border border-slate-300 rounded-lg p-2" /></div>
-          <div class="sm:col-span-2"><label class="block font-semibold text-slate-700 mb-1">Domain Skills</label><input type="text" id="regDomain" placeholder="e.g., Cloud, AI/ML, DevOps" class="w-full border border-slate-300 rounded-lg p-2" /></div>
-          <div class="sm:col-span-2 bg-slate-50 p-2.5 rounded-lg border border-slate-200 space-y-1.5">
+          
+          <div class="sm:col-span-2">
+            <label class="block font-semibold text-slate-700 mb-1">Professional Sector / Domain *</label>
+            <select id="regDomainCategory" class="w-full border border-slate-300 rounded-lg p-2" required>
+              <option value="Software, Cloud & AI Engineering">Software Engineering, Cloud & AI</option>
+              <option value="Industrial Manufacturing & Foundry IoT">Industrial Manufacturing & Foundry IoT (Local Industry)</option>
+              <option value="Agri-Tech & Rural Business">Agri-Tech, Smart Agriculture & Food Logistics</option>
+              <option value="Higher Education & Academic Research">Higher Education, Teaching & Research</option>
+              <option value="In Career Transition / Upskilling (Private)">In Career Transition / Return-to-Tech (Discreet)</option>
+            </select>
+          </div>
+
+          <div class="sm:col-span-2"><label class="block font-semibold text-slate-700 mb-1">LinkedIn Profile (Optional)</label><input type="url" id="regLinkedin" placeholder="https://linkedin.com/in/..." class="w-full border border-slate-300 rounded-lg p-2" /></div>
+          
+          <div class="sm:col-span-2 bg-slate-50 p-3 rounded-lg border border-slate-200 space-y-1.5">
+            <p class="font-semibold text-slate-800">🛡️ Privacy & Directory Visibility:</p>
+            <div class="space-y-1">
+              <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="privacyOption" value="PUBLIC" checked class="w-4 h-4 text-brand-600" /><span><strong>Public Profile:</strong> Visible to everyone in the directory.</span></label>
+              <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="privacyOption" value="SEMI" class="w-4 h-4 text-brand-600" /><span><strong>Semi-Anonymous:</strong> Shows as "Alumnus (Batch X)" with company/skills, but hides your name.</span></label>
+              <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="privacyOption" value="STEALTH" class="w-4 h-4 text-brand-600" /><span><strong>Stealth / Confidential:</strong> Hidden from directory; recorded only with faculty coordinators.</span></label>
+            </div>
+          </div>
+
+          <div class="sm:col-span-2 bg-slate-50 p-2.5 rounded-lg border border-slate-200 space-y-1">
             <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="regMentor" checked class="w-4 h-4 text-brand-600 rounded" /><span>Willing to mentor ISE students</span></label>
             <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="regTalk" checked class="w-4 h-4 text-brand-600 rounded" /><span>Willing to deliver online webinars</span></label>
             <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="regInPerson" checked class="w-4 h-4 text-brand-600 rounded" /><span>Available for campus visits (50/100 Km Club)</span></label>
           </div>
         </div>
         <div class="mt-4 flex justify-end gap-2">
-          <button type="button" onclick="closeModal('registerModal')" class="px-4 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 rounded-lg">Cancel</button>
-          <button type="submit" id="btnSubmitReg" class="px-4 py-2 text-xs font-semibold bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-lg">Submit Registration</button>
+          <button type="button" onclick="closeModal('registerModal')" class="px-4 py-2 font-medium text-slate-600 hover:bg-slate-100 rounded-lg">Cancel</button>
+          <button type="submit" id="btnSubmitReg" class="px-4 py-2 font-semibold bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-lg">Submit Registration</button>
         </div>
       </form>
     </div>
@@ -321,6 +341,8 @@
       <div class="flex items-center gap-4">
         <a href="https://2025.git.edu/alumni/" target="_blank" class="text-amber-400 hover:underline">KLS GIT Alumni Cell</a>
         <span>•</span>
+        <button onclick="openModal('rebootModal')" class="text-emerald-400 hover:underline">Career Reboot</button>
+        <span>•</span>
         <button onclick="openModal('admissionModal')" class="text-amber-400 hover:underline">Admission Benefits</button>
         <span>•</span>
         <button onclick="openModal('perksModal')" class="text-amber-400 hover:underline">Campus Privileges</button>
@@ -330,7 +352,7 @@
 
   <script>
     const APPS_SCRIPT_API_URL = "https://script.google.com/macros/s/AKfycbwzku0AvQeJC2IJRQ0yZizWUOuRkGc7ixQy8ppwuBMhSwDX8GE5nqvABIsF6NOfDsXrYg/exec";
-    const INITIAL_ALUMNI = [{"id": "ise-01", "name": "Abhishek Joshi", "batch": "2015-2019", "passoutYear": 2019, "designation": "Software Engineer", "company": "Pelatro Solutions", "city": "Bengaluru", "country": "India", "linkedin": "http://linkedin.com/in/abhishek-joshi-94b88210a", "domain": "IoT, Computer Organization, Systems", "canMentor": true, "canGiveTalk": true, "pastEvent": "Expert Talk on Number Systems & IoT LoRa Networks"}, {"id": "ise-02", "name": "Sanjana Baliga", "batch": "2015-2019", "passoutYear": 2019, "designation": "Developer & UI Guide", "company": "PricewaterhouseCoopers (PwC - Salesforce India)", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/sanjanabaliga", "domain": "Salesforce, UI/UX, Cloud Applications", "canMentor": true, "canGiveTalk": true, "pastEvent": "Expert Talk on Salesforce Platform Careers"}, {"id": "ise-03", "name": "Vasavi Dixit", "batch": "2015-2019", "passoutYear": 2019, "designation": "Senior Software Engineer", "company": "Subex", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/vasavi-dixit-363138136/", "domain": "Telecom Software, Enterprise Engineering", "canMentor": true, "canGiveTalk": false, "pastEvent": "Department Poster Design Judge"}, {"id": "ise-04", "name": "Tejas Patkar", "batch": "2016-2020", "passoutYear": 2020, "designation": "Software Engineer", "company": "PricewaterhouseCoopers (PwC - Salesforce India)", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/tejaspatkar", "domain": "Cloud Solutions, Enterprise CRM", "canMentor": true, "canGiveTalk": true, "pastEvent": "Webinar on Placement Awareness for Pre-Final Years"}, {"id": "ise-05", "name": "Chinmay Yelamali", "batch": "2014-2018", "passoutYear": 2018, "designation": "Software Engineer", "company": "MetricStream", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/chinmayyalameli/", "domain": "GRC Software, Product Engineering", "canMentor": true, "canGiveTalk": false, "pastEvent": "Department Event Judge"}, {"id": "ise-06", "name": "Veena Badmi", "batch": "2012-2016", "passoutYear": 2016, "designation": "Software Engineer", "company": "Microsoft India (R&D)", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/veena-badmi-38485ba1", "domain": "Distributed Systems, Cloud Platforms", "canMentor": true, "canGiveTalk": true, "pastEvent": "Webinar on Placement & Tech Career Guidance"}, {"id": "ise-07", "name": "Upendra B", "batch": "2012-2016", "passoutYear": 2016, "designation": "Senior Data Analyst", "company": "Tesco", "city": "Bengaluru", "country": "India", "linkedin": "", "domain": "Data Analytics, Retail AI, Business Intelligence", "canMentor": true, "canGiveTalk": true, "pastEvent": "Expert talk on AI Challenges and Applications in IT"}, {"id": "ise-08", "name": "Chetan S P", "batch": "2010-2014", "passoutYear": 2014, "designation": "Software Engineer", "company": "Deloitte USI", "city": "Bengaluru", "country": "India", "linkedin": "", "domain": "Big Data Management, Enterprise Data Architecture", "canMentor": true, "canGiveTalk": true, "pastEvent": "Expert Talk on Real-time Big Data Management"}, {"id": "ise-09", "name": "Nitish Hegde", "batch": "2010-2014", "passoutYear": 2014, "designation": "Software Engineer", "company": "Juniper Networks", "city": "Bengaluru", "country": "India", "linkedin": "", "domain": "Networking Protocols, Hardware Workflow", "canMentor": true, "canGiveTalk": true, "pastEvent": "Expert Talk on Networking Devices & Workflow Management"}, {"id": "ise-10", "name": "Chaitanya Hebbal", "batch": "2009-2013", "passoutYear": 2013, "designation": "Technical Specialist", "company": "Hexagon & MSC Software Development", "city": "Pune", "country": "India", "linkedin": "", "domain": "Autonomy, Robotics, Computer Vision, Simulation", "canMentor": true, "canGiveTalk": true, "pastEvent": "Technical Talk on AI - Autonomy in Self Driving Cars & Robots"}, {"id": "ise-11", "name": "Praveen Hondad", "batch": "2009-2013", "passoutYear": 2013, "designation": "Data Scientist", "company": "Infosys", "city": "Bengaluru / Hubballi", "country": "India", "linkedin": "https://www.linkedin.com/in/praveen-hondad-b088b6a1/", "domain": "Data Science, Machine Learning, Analytics", "canMentor": true, "canGiveTalk": true, "pastEvent": "Expert Talk on Data Science & Department Evaluation"}, {"id": "ise-12", "name": "Sumeet Shahpeti", "batch": "2008-2012", "passoutYear": 2012, "designation": "Senior SAP Consultant", "company": "Bristlecone", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/sumeetshahapeti/", "domain": "Enterprise ERP, Supply Chain, SAP S/4HANA", "canMentor": true, "canGiveTalk": false, "pastEvent": "Judge for Poster Design & Hackathon"}, {"id": "ise-13", "name": "Rudresh Katagi", "batch": "2008-2012", "passoutYear": 2012, "designation": "Senior Database Developer", "company": "Verna Networks", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/rudresh-katagi-589a0153", "domain": "Database Engineering, Python, Backend Optimization", "canMentor": true, "canGiveTalk": true, "pastEvent": "Expert Session on Database Programming using Python"}, {"id": "ise-14", "name": "Sandeep Hegde", "batch": "2006-2010", "passoutYear": 2010, "designation": "Growth, Marketing & Startup Consultant", "company": "Independent / Venture Consulting", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/sandeephegde", "domain": "Product Growth, Startup Mentorship, Digital Marketing", "canMentor": true, "canGiveTalk": true, "pastEvent": "Startup Incubation & Entrepreneurship Mentor"}, {"id": "ise-15", "name": "Purushottam Deshpande", "batch": "2003-2007", "passoutYear": 2007, "designation": "Engineering Manager", "company": "Decision Resources Group (DRG)", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/phdeshpande", "domain": "Modern JavaScript (ES6+), Data Structures, Engineering Leadership", "canMentor": true, "canGiveTalk": true, "pastEvent": "Talks on ES6 JavaScript and Data Structures in Software Dev"}, {"id": "ise-16", "name": "Aditya Deshpande", "batch": "2007-2011", "passoutYear": 2011, "designation": "Senior Lithography Systems Specialist", "company": "High-Tech Manufacturing (Semiconductor)", "city": "Eindhoven, Noord-Brabant", "country": "Netherlands", "linkedin": "", "domain": "Dry Lithography, Semiconductor Tech, International Engineering", "canMentor": true, "canGiveTalk": true, "pastEvent": "Global Alumni Chapter (Europe Outreach)"}, {"id": "ise-17", "name": "Dundappa Hulkund", "batch": "2009-2013", "passoutYear": 2013, "designation": "Big Data Specialist", "company": "Billigence (ex-Wipro)", "city": "Sydney, New South Wales", "country": "Australia", "linkedin": "", "domain": "Big Data, Data Warehousing, Cloud Analytics", "canMentor": true, "canGiveTalk": true, "pastEvent": "Global Alumni Chapter (Australia Outreach)"}, {"id": "ise-18", "name": "Madhuri Kulkarni", "batch": "2010-2014", "passoutYear": 2014, "designation": "Digital Solutions Specialist", "company": "CHE Proximity", "city": "Sydney", "country": "Australia", "linkedin": "", "domain": "Digital Strategy, Customer Experience Engineering", "canMentor": true, "canGiveTalk": true, "pastEvent": "Global Alumni Chapter (Australia Outreach)"}, {"id": "ise-19", "name": "Poonam Havnoor", "batch": "2013-2017", "passoutYear": 2017, "designation": "Software Development Engineer", "company": "Amazon", "city": "Bengaluru", "country": "India", "linkedin": "", "domain": "Cloud Infrastructure, Distributed Systems, AWS", "canMentor": true, "canGiveTalk": true, "pastEvent": "Campus Placement Drive Preparations"}, {"id": "ise-20", "name": "Surendra Kumar Deshpande", "batch": "2011-2015", "passoutYear": 2015, "designation": "Lead DevOps Architect", "company": "Enterprise Tech Solutions", "city": "Bengaluru", "country": "India", "linkedin": "", "domain": "DevOps, CI/CD, Kubernetes, Cloud Infrastructure", "canMentor": true, "canGiveTalk": true, "pastEvent": "DevOps Career Workshop"}, {"id": "ise-loc-01", "name": "Prof. Shrinidhi Kulkarni", "batch": "2005-2009", "passoutYear": 2009, "designation": "Tech Lead & Solutions Architect", "company": "Quanteon Solutions / Tech Consultant", "city": "Belagavi", "country": "India", "linkedin": "", "domain": "Full Stack Architecture, Cloud, Microservices", "canMentor": true, "canGiveTalk": true, "pastEvent": "Campus Tech Workshop Speaker"}, {"id": "ise-loc-02", "name": "Vinayak Patil", "batch": "2013-2017", "passoutYear": 2017, "designation": "Founder & Director", "company": "AgroTech Robotics / Belagavi Foundry IT", "city": "Belagavi", "country": "India", "linkedin": "", "domain": "Embedded Systems, Industrial IoT, Automation", "canMentor": true, "canGiveTalk": true, "pastEvent": "Local Industry Interaction"}, {"id": "ise-loc-03", "name": "Deepa Joshi", "batch": "2011-2015", "passoutYear": 2015, "designation": "Senior Data Engineer", "company": "Tata Consultancy Services", "city": "Hubballi", "country": "India", "linkedin": "", "domain": "Data Warehousing, ETL, Snowflake", "canMentor": true, "canGiveTalk": true, "pastEvent": "Online Career Session"}, {"id": "ise-loc-04", "name": "Sachin Kulkarni", "batch": "2014-2018", "passoutYear": 2018, "designation": "Senior QA Automation Lead", "company": "Kalyani Tech / Kolhapur Engineering", "city": "Kolhapur", "country": "India", "linkedin": "", "domain": "Selenium, Cypress, Performance Engineering", "canMentor": true, "canGiveTalk": true, "pastEvent": "Alumni Meet Contributor"}];
+    const INITIAL_ALUMNI = [{"id": "ise-01", "name": "Abhishek Joshi", "batch": "2015-2019", "passoutYear": 2019, "designation": "Software Engineer", "company": "Pelatro Solutions", "city": "Bengaluru", "country": "India", "linkedin": "http://linkedin.com/in/abhishek-joshi-94b88210a", "domain": "IoT, Computer Organization, Systems", "canMentor": true, "canGiveTalk": true, "pastEvent": "Expert Talk on Number Systems & IoT LoRa Networks"}, {"id": "ise-02", "name": "Sanjana Baliga", "batch": "2015-2019", "passoutYear": 2019, "designation": "Developer & UI Guide", "company": "PricewaterhouseCoopers (PwC - Salesforce India)", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/sanjanabaliga", "domain": "Salesforce, UI/UX, Cloud Applications", "canMentor": true, "canGiveTalk": true, "pastEvent": "Expert Talk on Salesforce Platform Careers"}, {"id": "ise-03", "name": "Vasavi Dixit", "batch": "2015-2019", "passoutYear": 2019, "designation": "Senior Software Engineer", "company": "Subex", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/vasavi-dixit-363138136/", "domain": "Telecom Software, Enterprise Engineering", "canMentor": true, "canGiveTalk": false, "pastEvent": "Department Poster Design Judge"}, {"id": "ise-04", "name": "Tejas Patkar", "batch": "2016-2020", "passoutYear": 2020, "designation": "Software Engineer", "company": "PricewaterhouseCoopers (PwC - Salesforce India)", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/tejaspatkar", "domain": "Cloud Solutions, Enterprise CRM", "canMentor": true, "canGiveTalk": true, "pastEvent": "Webinar on Placement Awareness for Pre-Final Years"}, {"id": "ise-05", "name": "Chinmay Yelamali", "batch": "2014-2018", "passoutYear": 2018, "designation": "Software Engineer", "company": "MetricStream", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/chinmayyalameli/", "domain": "GRC Software, Product Engineering", "canMentor": true, "canGiveTalk": false, "pastEvent": "Department Event Judge"}, {"id": "ise-06", "name": "Veena Badmi", "batch": "2012-2016", "passoutYear": 2016, "designation": "Software Engineer", "company": "Microsoft India (R&D)", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/veena-badmi-38485ba1", "domain": "Distributed Systems, Cloud Platforms", "canMentor": true, "canGiveTalk": true, "pastEvent": "Webinar on Placement & Tech Career Guidance"}, {"id": "ise-07", "name": "Upendra B", "batch": "2012-2016", "passoutYear": 2016, "designation": "Senior Data Analyst", "company": "Tesco", "city": "Bengaluru", "country": "India", "linkedin": "", "domain": "Data Analytics, Retail AI, Business Intelligence", "canMentor": true, "canGiveTalk": true, "pastEvent": "Expert talk on AI Challenges and Applications in IT"}, {"id": "ise-08", "name": "Chetan S P", "batch": "2010-2014", "passoutYear": 2014, "designation": "Software Engineer", "company": "Deloitte USI", "city": "Bengaluru", "country": "India", "linkedin": "", "domain": "Big Data Management, Enterprise Data Architecture", "canMentor": true, "canGiveTalk": true, "pastEvent": "Expert Talk on Real-time Big Data Management"}, {"id": "ise-09", "name": "Nitish Hegde", "batch": "2010-2014", "passoutYear": 2014, "designation": "Software Engineer", "company": "Juniper Networks", "city": "Bengaluru", "country": "India", "linkedin": "", "domain": "Networking Protocols, Hardware Workflow", "canMentor": true, "canGiveTalk": true, "pastEvent": "Expert Talk on Networking Devices & Workflow Management"}, {"id": "ise-10", "name": "Chaitanya Hebbal", "batch": "2009-2013", "passoutYear": 2013, "designation": "Technical Specialist", "company": "Hexagon & MSC Software Development", "city": "Pune", "country": "India", "linkedin": "", "domain": "Autonomy, Robotics, Computer Vision, Simulation", "canMentor": true, "canGiveTalk": true, "pastEvent": "Technical Talk on AI - Autonomy in Self Driving Cars & Robots"}, {"id": "ise-11", "name": "Praveen Hondad", "batch": "2009-2013", "passoutYear": 2013, "designation": "Data Scientist", "company": "Infosys", "city": "Bengaluru / Hubballi", "country": "India", "linkedin": "https://www.linkedin.com/in/praveen-hondad-b088b6a1/", "domain": "Data Science, Machine Learning, Analytics", "canMentor": true, "canGiveTalk": true, "pastEvent": "Expert Talk on Data Science & Department Evaluation"}, {"id": "ise-12", "name": "Sumeet Shahpeti", "batch": "2008-2012", "passoutYear": 2012, "designation": "Senior SAP Consultant", "company": "Bristlecone", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/sumeetshahapeti/", "domain": "Enterprise ERP, Supply Chain, SAP S/4HANA", "canMentor": true, "canGiveTalk": false, "pastEvent": "Judge for Poster Design & Hackathon"}, {"id": "ise-13", "name": "Rudresh Katagi", "batch": "2008-2012", "passoutYear": 2012, "designation": "Senior Database Developer", "company": "Verna Networks", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/rudresh-katagi-589a0153", "domain": "Database Engineering, Python, Backend Optimization", "canMentor": true, "canGiveTalk": true, "pastEvent": "Expert Session on Database Programming using Python"}, {"id": "ise-14", "name": "Sandeep Hegde", "batch": "2006-2010", "passoutYear": 2010, "designation": "Growth, Marketing & Startup Consultant", "company": "Independent / Venture Consulting", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/sandeephegde", "domain": "Product Growth, Startup Mentorship, Digital Marketing", "canMentor": true, "canGiveTalk": true, "pastEvent": "Startup Incubation & Entrepreneurship Mentor"}, {"id": "ise-15", "name": "Purushottam Deshpande", "batch": "2003-2007", "passoutYear": 2007, "designation": "Engineering Manager", "company": "Decision Resources Group (DRG)", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/phdeshpande", "domain": "Modern JavaScript (ES6+), Data Structures, Engineering Leadership", "canMentor": true, "canGiveTalk": true, "pastEvent": "Talks on ES6 JavaScript and Data Structures in Software Dev"}, {"id": "ise-16", "name": "Aditya Deshpande", "batch": "2007-2011", "passoutYear": 2011, "designation": "Senior Lithography Systems Specialist", "company": "High-Tech Manufacturing (Semiconductor)", "city": "Eindhoven, Noord-Brabant", "country": "Netherlands", "linkedin": "", "domain": "Dry Lithography, Semiconductor Tech, International Engineering", "canMentor": true, "canGiveTalk": true, "pastEvent": "Global Alumni Chapter (Europe Outreach)"}, {"id": "ise-17", "name": "Dundappa Hulkund", "batch": "2009-2013", "passoutYear": 2013, "designation": "Big Data Specialist", "company": "Billigence (ex-Wipro)", "city": "Sydney, New South Wales", "country": "Australia", "linkedin": "", "domain": "Foundry Automation, SCADA, Industrial IoT", "canMentor": true, "canGiveTalk": true, "pastEvent": "Global Alumni Chapter (Australia Outreach)"}, {"id": "ise-18", "name": "Madhuri Kulkarni", "batch": "2010-2014", "passoutYear": 2014, "designation": "Digital Solutions Specialist", "company": "CHE Proximity", "city": "Sydney", "country": "Australia", "linkedin": "", "domain": "Agri-Tech Systems, Rural Supply Chain", "canMentor": true, "canGiveTalk": true, "pastEvent": "Global Alumni Chapter (Australia Outreach)"}, {"id": "ise-19", "name": "Poonam Havnoor", "batch": "2013-2017", "passoutYear": 2017, "designation": "Software Development Engineer", "company": "Amazon", "city": "Bengaluru", "country": "India", "linkedin": "", "domain": "Academic Research, Computer Networks, VTU", "canMentor": true, "canGiveTalk": true, "pastEvent": "Campus Placement Drive Preparations"}, {"id": "ise-20", "name": "Surendra Kumar Deshpande", "batch": "2011-2015", "passoutYear": 2015, "designation": "Lead DevOps Architect", "company": "Enterprise Tech Solutions", "city": "Bengaluru", "country": "India", "linkedin": "", "domain": "DevOps, CI/CD, Kubernetes, Cloud Infrastructure", "canMentor": true, "canGiveTalk": true, "pastEvent": "DevOps Career Workshop"}, {"id": "ise-loc-01", "name": "Prof. Shrinidhi Kulkarni", "batch": "2005-2009", "passoutYear": 2009, "designation": "Tech Lead & Solutions Architect", "company": "Quanteon Solutions / Tech Consultant", "city": "Belagavi", "country": "India", "linkedin": "", "domain": "Full Stack Architecture, Cloud, Microservices", "canMentor": true, "canGiveTalk": true, "pastEvent": "Campus Tech Workshop Speaker"}, {"id": "ise-loc-02", "name": "Vinayak Patil", "batch": "2013-2017", "passoutYear": 2017, "designation": "Founder & Director", "company": "AgroTech Robotics / Belagavi Foundry IT", "city": "Belagavi", "country": "India", "linkedin": "", "domain": "Embedded Systems, Industrial IoT, Automation", "canMentor": true, "canGiveTalk": true, "pastEvent": "Local Industry Interaction"}, {"id": "ise-loc-03", "name": "Deepa Joshi", "batch": "2011-2015", "passoutYear": 2015, "designation": "Senior Data Engineer", "company": "Tata Consultancy Services", "city": "Hubballi", "country": "India", "linkedin": "", "domain": "Data Warehousing, ETL, Snowflake", "canMentor": true, "canGiveTalk": true, "pastEvent": "Online Career Session"}, {"id": "ise-loc-04", "name": "Sachin Kulkarni", "batch": "2014-2018", "passoutYear": 2018, "designation": "Senior QA Automation Lead", "company": "Kalyani Tech / Kolhapur Engineering", "city": "Kolhapur", "country": "India", "linkedin": "", "domain": "Selenium, Cypress, Performance Engineering", "canMentor": true, "canGiveTalk": true, "pastEvent": "Alumni Meet Contributor"}, {"id": "ise-anon-01", "name": "Alumnus (Batch 2012-2016)", "batch": "2012-2016", "passoutYear": 2016, "designation": "Principal Security Architect", "company": "Confidential / Stealth Cyber Enterprise", "city": "Bengaluru", "country": "India", "linkedin": "", "domain": "Cyber Defense, Stealth Systems, Cloud Security", "canMentor": true, "canGiveTalk": true, "isPrivate": false, "isSemiAnon": true, "pastEvent": "Specialized Security Guidance"}];
 
     let alumniData = [];
     let currentView = 'grid';
@@ -357,7 +379,6 @@
         saveData();
       }
       populateBatchFilter();
-      populateCountryFilter();
       render();
 
       if (APPS_SCRIPT_API_URL) {
@@ -376,7 +397,6 @@
             if (added) {
               saveData();
               populateBatchFilter();
-              populateCountryFilter();
               render();
             }
           }
@@ -400,20 +420,6 @@
       batchSelect.value = cur || 'ALL';
     }
 
-    function populateCountryFilter() {
-      const countrySelect = document.getElementById('countryFilter');
-      const cur = countrySelect.value;
-      countrySelect.innerHTML = '<option value="ALL">All Countries</option>';
-      const countries = Array.from(new Set(alumniData.map(a => a.country))).filter(Boolean).sort();
-      countries.forEach(c => {
-        const opt = document.createElement('option');
-        opt.value = c;
-        opt.textContent = c;
-        countrySelect.appendChild(opt);
-      });
-      countrySelect.value = cur || 'ALL';
-    }
-
     function setRadiusClub(club) {
       currentRadiusClub = club;
       render();
@@ -421,11 +427,13 @@
 
     function getFilteredData() {
       const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const domain = document.getElementById('domainFilter').value;
       const batch = document.getElementById('batchFilter').value;
-      const country = document.getElementById('countryFilter').value;
       const interaction = document.getElementById('interactionFilter').value;
 
       return alumniData.filter(item => {
+        if (item.isPrivate) return false;
+
         const matchQuery = !query || 
           (item.name && item.name.toLowerCase().includes(query)) ||
           (item.company && item.company.toLowerCase().includes(query)) ||
@@ -434,8 +442,14 @@
           (item.country && item.country.toLowerCase().includes(query)) ||
           (item.domain && item.domain.toLowerCase().includes(query));
 
+        let matchDomain = true;
+        const dom = (item.domain || '').toLowerCase();
+        if (domain === 'TECH') matchDomain = dom.includes('cloud') || dom.includes('software') || dom.includes('ai') || dom.includes('iot') || dom.includes('devops');
+        if (domain === 'INDUSTRIAL') matchDomain = dom.includes('foundry') || dom.includes('manufacturing') || dom.includes('scada') || dom.includes('industrial');
+        if (domain === 'AGRI') matchDomain = dom.includes('agri') || dom.includes('rural') || dom.includes('food');
+        if (domain === 'ACADEMIA') matchDomain = dom.includes('research') || dom.includes('academic') || dom.includes('vtu');
+
         const matchBatch = batch === 'ALL' || item.batch === batch;
-        const matchCountry = country === 'ALL' || item.country === country;
         
         let matchInteract = true;
         if (interaction === 'MENTOR') matchInteract = item.canMentor;
@@ -447,12 +461,12 @@
         if (currentRadiusClub === '100KM') matchClub = (club === '100KM' || club === '50KM');
         if (currentRadiusClub === 'OVERSEAS') matchClub = (club === 'OVERSEAS');
 
-        return matchQuery && matchBatch && matchCountry && matchInteract && matchClub;
+        return matchQuery && matchDomain && matchBatch && matchInteract && matchClub;
       });
     }
 
     function updateStats(filtered) {
-      document.getElementById('stat-total').textContent = alumniData.length;
+      document.getElementById('stat-total').textContent = alumniData.filter(a => !a.isPrivate).length;
       document.getElementById('stat-50km').textContent = alumniData.filter(a => getAlumniClub(a) === '50KM').length;
       document.getElementById('stat-100km').textContent = alumniData.filter(a => getAlumniClub(a) === '100KM' || getAlumniClub(a) === '50KM').length;
       document.getElementById('stat-batches').textContent = `${new Set(alumniData.map(a => a.batch)).size} Batches`;
@@ -467,8 +481,8 @@
 
     function resetFilters() {
       document.getElementById('searchInput').value = '';
+      document.getElementById('domainFilter').value = 'ALL';
       document.getElementById('batchFilter').value = 'ALL';
-      document.getElementById('countryFilter').value = 'ALL';
       document.getElementById('interactionFilter').value = 'ALL';
       setRadiusClub('ALL');
     }
@@ -481,7 +495,7 @@
       const container = document.getElementById('viewContainer');
 
       if (filtered.length === 0) {
-        container.innerHTML = `<div class="bg-white rounded-xl p-12 text-center border border-slate-200"><h4 class="text-base font-semibold text-slate-800">No Alumni in this Proximity / Filter</h4><p class="text-xs text-slate-500 mt-1">Try selecting 'All Locations' or invite local alumni to register.</p></div>`;
+        container.innerHTML = `<div class="bg-white rounded-xl p-12 text-center border border-slate-200"><h4 class="text-base font-semibold text-slate-800">No Alumni in this Sector / Proximity</h4><p class="text-xs text-slate-500 mt-1">Try resetting filters to explore all sectors.</p></div>`;
         return;
       }
 
@@ -494,13 +508,19 @@
       container.innerHTML = `<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         ${items.map(item => {
           const club = getAlumniClub(item);
+          const isSemi = item.isSemiAnon;
           return `
           <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
             <div>
               <div class="flex items-start justify-between gap-3 mb-2.5">
                 <div class="flex items-center gap-3">
-                  <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-700 to-blue-500 text-white font-bold flex items-center justify-center text-sm shadow-sm flex-shrink-0">${getInitials(item.name)}</div>
-                  <div><h4 class="font-bold text-slate-900 text-sm leading-tight">${item.name}</h4><p class="text-xs text-slate-500">${item.designation || 'Alumnus'}</p></div>
+                  <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-700 to-blue-500 text-white font-bold flex items-center justify-center text-sm shadow-sm flex-shrink-0">
+                    ${isSemi ? '🔒' : getInitials(item.name)}
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-slate-900 text-sm leading-tight">${item.name}</h4>
+                    <p class="text-xs text-slate-500">${item.designation || 'Alumnus'}</p>
+                  </div>
                 </div>
                 <span class="badge bg-blue-50 text-brand-700 border border-blue-100 flex-shrink-0">Batch ${item.batch}</span>
               </div>
@@ -517,7 +537,7 @@
               </div>
             </div>
             <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
-              ${item.linkedin ? `<a href="${item.linkedin}" target="_blank" class="text-xs text-brand-600 hover:text-brand-800 font-semibold">LinkedIn &rarr;</a>` : `<span class="text-xs text-slate-400 italic">No link</span>`}
+              ${item.linkedin ? `<a href="${item.linkedin}" target="_blank" class="text-xs text-brand-600 hover:text-brand-800 font-semibold">LinkedIn &rarr;</a>` : `<span class="text-xs text-slate-400 italic">${isSemi ? 'Private Profile' : 'No link'}</span>`}
               <button onclick="openConnectModal('${item.id}')" class="text-xs bg-slate-900 hover:bg-brand-700 text-white font-medium px-2.5 py-1.5 rounded-lg transition-colors">
                 ${club === '50KM' ? 'Invite to Campus' : 'Connect / Talk'}
               </button>
@@ -541,19 +561,18 @@
             <div class="overflow-x-auto">
               <table class="w-full text-left text-xs">
                 <thead class="bg-slate-50 text-slate-600 font-semibold border-b border-slate-200">
-                  <tr><th class="py-2.5 px-4">Name</th><th class="py-2.5 px-4">Current Role</th><th class="py-2.5 px-4">Organization</th><th class="py-2.5 px-4">Location & Club</th><th class="py-2.5 px-4 text-right">Connect</th></tr>
+                  <tr><th class="py-2.5 px-4">Name</th><th class="py-2.5 px-4">Current Role</th><th class="py-2.5 px-4">Organization</th><th class="py-2.5 px-4">Sector / Domain</th><th class="py-2.5 px-4 text-right">Connect</th></tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100">
-                  ${grouped[batch].map(alumnus => {
-                    const club = getAlumniClub(alumnus);
-                    return `<tr class="hover:bg-slate-50/80">
+                  ${grouped[batch].map(alumnus => `
+                    <tr class="hover:bg-slate-50/80">
                       <td class="py-3 px-4 font-semibold text-slate-900">${alumnus.name}</td>
                       <td class="py-3 px-4 text-slate-700">${alumnus.designation || 'Alumnus'}</td>
                       <td class="py-3 px-4 text-slate-800 font-medium">${alumnus.company || 'Not Specified'}</td>
-                      <td class="py-3 px-4 text-slate-600">${alumnus.city ? `${alumnus.city}, ` : ''}${alumnus.country} ${club === '50KM' ? '📍' : club === '100KM' ? '🚗' : ''}</td>
+                      <td class="py-3 px-4 text-slate-600">${alumnus.domain || 'Technology'}</td>
                       <td class="py-3 px-4 text-right"><button onclick="openConnectModal('${alumnus.id}')" class="bg-brand-50 hover:bg-brand-100 text-brand-700 font-semibold px-2.5 py-1 rounded text-xs">Interact</button></td>
-                    </tr>`;
-                  }).join('')}
+                    </tr>
+                  `).join('')}
                 </tbody>
               </table>
             </div>
@@ -593,7 +612,7 @@
       selectedAlumnus = alumnus;
       document.getElementById('modalAlumniName').textContent = `Connect with ${alumnus.name}`;
       document.getElementById('modalAlumniRole').textContent = `${alumnus.designation} at ${alumnus.company} (Batch ${alumnus.batch})`;
-      document.getElementById('modalAlumniAvatar').textContent = getInitials(alumnus.name);
+      document.getElementById('modalAlumniAvatar').textContent = alumnus.isSemiAnon ? '🔒' : getInitials(alumnus.name);
       openModal('connectModal');
     }
 
@@ -603,30 +622,37 @@
       closeModal('connectModal');
     }
 
-    function handleAdmissionRequest(e) {
+    function handleRebootRequest(e) {
       e.preventDefault();
-      const aName = document.getElementById('admAlumniName').value;
-      const sName = document.getElementById('admStudentName').value;
-      const rel = document.getElementById('admRelation').value;
-      const target = document.getElementById('admTargetInst').value;
-      alert(`KLS Admission Guidance Request Submitted!\n\nAlumnus: ${aName}\nApplicant: ${sName} (${rel})\nTarget: ${target}\n\nThis request has been recorded for Department Endorsement and forwarding to KLS Management / Admission Cell.`);
-      closeModal('admissionModal');
+      const n = document.getElementById('rebName').value;
+      const t = document.getElementById('rebType').value;
+      alert(`Confidential Career Request Submitted for ${n}!\n\nType: ${t}\n\nThis has been sent privately to Prof. Upparamani / Department Coordinator for 1-on-1 confidential assistance.`);
+      closeModal('rebootModal');
     }
 
     async function handleRegisterSubmit(e) {
       e.preventDefault();
+      const privacy = document.querySelector('input[name="privacyOption"]:checked').value;
+      const isPrivate = (privacy === 'STEALTH');
+      const isSemiAnon = (privacy === 'SEMI');
+      const rawName = document.getElementById('regName').value;
+      const batch = document.getElementById('regBatch').value;
+
       const newAlumnus = {
         id: 'alumni-' + Date.now(),
-        name: document.getElementById('regName').value,
+        name: isSemiAnon ? `Alumnus (Batch ${batch})` : rawName,
+        actualName: rawName,
         usn: document.getElementById('regUSN').value,
-        batch: document.getElementById('regBatch').value,
-        passoutYear: document.getElementById('regBatch').value.split('-')[1]?.trim() || '',
+        batch: batch,
+        passoutYear: batch.split('-')[1]?.trim() || '',
         designation: document.getElementById('regTitle').value,
         company: document.getElementById('regCompany').value,
         city: document.getElementById('regCity').value,
         country: document.getElementById('regCountry').value,
-        linkedin: document.getElementById('regLinkedin').value,
-        domain: document.getElementById('regDomain').value,
+        domain: document.getElementById('regDomainCategory').value,
+        linkedin: isSemiAnon ? '' : document.getElementById('regLinkedin').value,
+        isPrivate: isPrivate,
+        isSemiAnon: isSemiAnon,
         canMentor: document.getElementById('regMentor').checked,
         canGiveTalk: document.getElementById('regTalk').checked
       };
@@ -634,7 +660,6 @@
       alumniData.unshift(newAlumnus);
       saveData();
       populateBatchFilter();
-      populateCountryFilter();
       render();
 
       if (APPS_SCRIPT_API_URL) {
@@ -645,10 +670,11 @@
             headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify(newAlumnus)
           });
-        } catch(err) { console.warn('Background sync error', err); }
+        } catch(err) { console.warn('API error', err); }
       }
+
       closeModal('registerModal');
-      alert(`Welcome to the KLS GIT ISE Alumni Network, ${newAlumnus.name}!`);
+      alert(`Registration Successful! ${isPrivate ? 'Your profile is set to Stealth mode (hidden from public directory).' : 'Welcome to the KLS GIT ISE Alumni Network!'}`);
     }
 
     function exportData() {
