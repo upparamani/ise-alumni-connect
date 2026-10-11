@@ -4,26 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KLS GIT ISE - Global Alumni Connect Portal</title>
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            brand: {
-              50: '#f0f5fa',
-              100: '#e1ecf5',
-              200: '#c3d9eb',
-              500: '#1d4ed8',
-              700: '#1e3a8a',
-              800: '#172554',
-              900: '#0f172a',
-            },
-            accent: {
-              500: '#d97706',
-              600: '#b45309',
-            }
+            brand: { 50: '#f0f5fa', 100: '#e1ecf5', 200: '#c3d9eb', 500: '#1d4ed8', 700: '#1e3a8a', 800: '#172554', 900: '#0f172a' },
+            accent: { 500: '#d97706', 600: '#b45309' }
           }
         }
       }
@@ -37,14 +25,11 @@
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
 
-  <!-- Top Header / Banner -->
   <header class="bg-gradient-to-r from-brand-900 via-brand-800 to-slate-900 text-white shadow-lg sticky top-0 z-30">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
       <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
         <div class="flex items-center space-x-3.5">
-          <div class="w-12 h-12 bg-white/10 rounded-xl border border-white/20 flex items-center justify-center font-extrabold text-xl text-amber-400 shadow-inner">
-            GIT
-          </div>
+          <div class="w-12 h-12 bg-white/10 rounded-xl border border-white/20 flex items-center justify-center font-extrabold text-xl text-amber-400 shadow-inner">GIT</div>
           <div>
             <div class="flex items-center gap-2">
               <span class="text-xs font-semibold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded">Karnataka Law Society</span>
@@ -54,82 +39,62 @@
             <p class="text-xs sm:text-sm text-blue-200 font-medium">Department of Information Science & Engineering (ISE) • Global Alumni Network</p>
           </div>
         </div>
-        <div class="flex items-center gap-2.5 self-end md:self-auto">
-          <button onclick="openModal('perksModal')" class="bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/30 font-semibold px-3 py-2 rounded-lg text-xs sm:text-sm transition-all flex items-center gap-1.5">
+        <div class="flex flex-wrap items-center gap-2.5 self-end md:self-auto">
+          <button onclick="openModal('admissionModal')" class="bg-amber-400/20 hover:bg-amber-400/30 text-amber-300 border border-amber-400/40 font-semibold px-3 py-2 rounded-lg text-xs sm:text-sm transition-all flex items-center gap-1.5 shadow-sm">
+            🎓 KLS Admission Benefits
+          </button>
+          <button onclick="openModal('perksModal')" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold px-3 py-2 rounded-lg text-xs sm:text-sm transition-all flex items-center gap-1.5">
             🎁 Alumni Privileges
           </button>
           <button onclick="openModal('registerModal')" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold px-3.5 py-2 rounded-lg text-xs sm:text-sm shadow-md transition-all flex items-center gap-1.5">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
             + Register as Alumnus
           </button>
-          <button onclick="exportData()" class="bg-white/10 hover:bg-white/20 text-white font-medium px-3 py-2 rounded-lg text-xs sm:text-sm border border-white/15 transition-all flex items-center gap-1.5">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-            Export
-          </button>
+          <button onclick="exportData()" class="bg-white/10 hover:bg-white/20 text-white font-medium px-2.5 py-2 rounded-lg text-xs sm:text-sm border border-white/15 transition-all">Export</button>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Metric Quick Stats Bar -->
   <section class="bg-white border-b border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
       <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 text-center">
-        <div class="border-r border-slate-100 last:border-0">
-          <p class="text-xs text-slate-500 font-medium">Alumni in Directory</p>
-          <p id="stat-total" class="text-xl sm:text-2xl font-bold text-brand-700">0</p>
-        </div>
-        <div class="border-r border-slate-100 last:border-0">
-          <p class="text-xs text-slate-500 font-medium">📍 50 Km Local Club</p>
-          <p id="stat-50km" class="text-xl sm:text-2xl font-bold text-emerald-600">0</p>
-        </div>
-        <div class="border-r border-slate-100 last:border-0">
-          <p class="text-xs text-slate-500 font-medium">🚗 100 Km Regional Club</p>
-          <p id="stat-100km" class="text-xl sm:text-2xl font-bold text-blue-600">0</p>
-        </div>
-        <div class="border-r border-slate-100 last:border-0">
-          <p class="text-xs text-slate-500 font-medium">Graduation Batches</p>
-          <p id="stat-batches" class="text-xl sm:text-2xl font-bold text-amber-600">0</p>
-        </div>
-        <div>
-          <p class="text-xs text-slate-500 font-medium">Available for Talks / Mentoring</p>
-          <p id="stat-volunteers" class="text-xl sm:text-2xl font-bold text-indigo-600">0</p>
-        </div>
+        <div class="border-r border-slate-100"><p class="text-xs text-slate-500 font-medium">Alumni in Directory</p><p id="stat-total" class="text-xl sm:text-2xl font-bold text-brand-700">0</p></div>
+        <div class="border-r border-slate-100"><p class="text-xs text-slate-500 font-medium">📍 50 Km Local Club</p><p id="stat-50km" class="text-xl sm:text-2xl font-bold text-emerald-600">0</p></div>
+        <div class="border-r border-slate-100"><p class="text-xs text-slate-500 font-medium">🚗 100 Km Regional Club</p><p id="stat-100km" class="text-xl sm:text-2xl font-bold text-blue-600">0</p></div>
+        <div class="border-r border-slate-100"><p class="text-xs text-slate-500 font-medium">Graduation Batches</p><p id="stat-batches" class="text-xl sm:text-2xl font-bold text-amber-600">0</p></div>
+        <div><p class="text-xs text-slate-500 font-medium">Available for Talks / Mentoring</p><p id="stat-volunteers" class="text-xl sm:text-2xl font-bold text-indigo-600">0</p></div>
       </div>
     </div>
   </section>
 
-  <!-- Main Container -->
+  <div class="bg-gradient-to-r from-amber-500 via-amber-600 to-brand-800 text-slate-950 py-2.5 px-4 shadow-sm">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs sm:text-sm font-semibold">
+      <div class="flex items-center gap-2 text-white">
+        <span class="bg-white/20 text-white px-2 py-0.5 rounded text-xs uppercase font-bold">New Initiative</span>
+        <span>KLS Educational Trust Kinship & Admission Guidance Program across KLS Institutions.</span>
+      </div>
+      <button onclick="openModal('admissionModal')" class="bg-white hover:bg-slate-100 text-slate-900 px-3 py-1 rounded-md text-xs font-bold shadow-xs transition">
+        View Admission Benefits & Sister Concerns &rarr;
+      </button>
+    </div>
+  </div>
+
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full">
-
-    <!-- Search & Filter Controls Card -->
     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-5 mb-6">
-      
-      <!-- Primary Search & Dropdowns -->
       <div class="grid grid-cols-1 md:grid-cols-12 gap-3.5">
-        <!-- Search Input -->
         <div class="md:col-span-5 relative">
-          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-          </div>
-          <input type="text" id="searchInput" oninput="render()" placeholder="Search by name, company, domain, or location..." class="w-full pl-9 pr-4 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
+          <input type="text" id="searchInput" oninput="render()" placeholder="Search by name, company, domain, or location..." class="w-full pl-4 pr-4 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
         </div>
-
-        <!-- Batch Filter Dropdown -->
         <div class="md:col-span-3">
           <select id="batchFilter" onchange="render()" class="w-full py-2 px-3 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white">
             <option value="ALL">All Batches (Chronological)</option>
           </select>
         </div>
-
-        <!-- Country / Region Filter -->
         <div class="md:col-span-2">
           <select id="countryFilter" onchange="render()" class="w-full py-2 px-3 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white">
             <option value="ALL">All Countries</option>
           </select>
         </div>
-
-        <!-- Mentorship / Talk Filter -->
         <div class="md:col-span-2">
           <select id="interactionFilter" onchange="render()" class="w-full py-2 px-3 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white">
             <option value="ALL">All Engagement</option>
@@ -139,37 +104,20 @@
         </div>
       </div>
 
-      <!-- Quick Radius Filter Club Buttons -->
       <div class="mt-3.5 pt-3.5 border-t border-slate-100 flex flex-wrap items-center gap-2">
-        <span class="text-xs font-semibold text-slate-500 mr-1 flex items-center gap-1">
-          <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
-          Proximity Clubs:
-        </span>
-        <button id="btn-radius-all" onclick="setRadiusClub('ALL')" class="px-3 py-1 rounded-full text-xs font-semibold bg-brand-700 text-white shadow-xs transition">
-          All Locations
-        </button>
-        <button id="btn-radius-50" onclick="setRadiusClub('50KM')" class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-300 hover:bg-emerald-100 transition flex items-center gap-1">
-          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-          📍 Locals 50 Km Club (Belagavi City & Vicinity)
-        </button>
-        <button id="btn-radius-100" onclick="setRadiusClub('100KM')" class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-100 transition flex items-center gap-1">
-          <span class="w-2 h-2 rounded-full bg-blue-500"></span>
-          🚗 Regional 100 Km Club (Hubballi-Dharwad / Kolhapur)
-        </button>
-        <button id="btn-radius-overseas" onclick="setRadiusClub('OVERSEAS')" class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-300 hover:bg-amber-100 transition flex items-center gap-1">
-          <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-          🌍 Overseas Chapters (Europe, Australia, USA)
-        </button>
+        <span class="text-xs font-semibold text-slate-500 mr-1">Proximity Clubs:</span>
+        <button id="btn-radius-all" onclick="setRadiusClub('ALL')" class="px-3 py-1 rounded-full text-xs font-semibold bg-brand-700 text-white shadow-xs transition">All Locations</button>
+        <button id="btn-radius-50" onclick="setRadiusClub('50KM')" class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-300 hover:bg-emerald-100 transition">📍 Locals 50 Km Club (Belagavi)</button>
+        <button id="btn-radius-100" onclick="setRadiusClub('100KM')" class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-100 transition">🚗 Regional 100 Km Club (Hubballi-Kolhapur)</button>
+        <button id="btn-radius-overseas" onclick="setRadiusClub('OVERSEAS')" class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-300 hover:bg-amber-100 transition">🌍 Overseas Chapters</button>
       </div>
 
-      <!-- Navigation & View Modes -->
       <div class="mt-3.5 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm">
         <div class="flex items-center space-x-1.5 bg-slate-100 p-1 rounded-lg">
           <button id="btn-grid" onclick="setViewMode('grid')" class="px-3 py-1.5 rounded-md font-medium text-slate-700 bg-white shadow-sm">Grid Cards</button>
           <button id="btn-batch" onclick="setViewMode('batch')" class="px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-slate-900">Batch-wise Directory</button>
           <button id="btn-global" onclick="setViewMode('global')" class="px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-slate-900">Global Chapters</button>
         </div>
-
         <div class="flex items-center gap-2 text-slate-500 text-xs">
           <span>Showing <strong id="showing-count" class="text-slate-800">0</strong> matching profiles</span>
           <button onclick="resetFilters()" class="text-brand-500 hover:text-brand-700 underline font-medium">Reset Filters</button>
@@ -177,85 +125,128 @@
       </div>
     </div>
 
-    <!-- Active View Container -->
-    <div id="viewContainer">
-      <!-- Cards/table rendered dynamically -->
-    </div>
+    <div id="viewContainer"></div>
   </main>
 
-  <!-- Alumni Privileges & Perks Modal -->
+  <div id="admissionModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative border border-slate-100 max-h-[92vh] overflow-y-auto">
+      <button onclick="closeModal('admissionModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-lg">✕</button>
+      
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-amber-500 to-amber-600 text-white flex items-center justify-center text-2xl font-bold shadow-sm">🎓</div>
+        <div>
+          <h3 class="font-bold text-slate-900 text-lg sm:text-xl">KLS Alumni Legacy & Admission Assistance</h3>
+          <p class="text-xs text-slate-500">Educational concessions & priority guidance across Karnataka Law Society institutions.</p>
+        </div>
+      </div>
+
+      <div class="bg-blue-50 border border-blue-200 rounded-xl p-3.5 mb-4 text-xs text-blue-900">
+        <p class="font-semibold text-blue-950 mb-1">“Once a Student of KLS GIT, Always Part of the KLS Family.”</p>
+        <p>In recognition of alumni contributions to student webinars, mentoring, and department growth, the KLS Educational Trust extends admission assistance and institutional legacy fee concessions for children and immediate family members.</p>
+      </div>
+
+      <div class="mb-4">
+        <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider mb-2">Eligible KLS Sister Concerns & Institutions</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+          <div class="p-2.5 rounded-lg border border-slate-200 bg-slate-50"><p class="font-bold text-slate-900">1. KLS Gogte Institute of Technology (GIT)</p><p class="text-slate-500 text-[11px]">B.E. (All Branches), M.Tech, MBA, MCA, Ph.D. — Belagavi</p></div>
+          <div class="p-2.5 rounded-lg border border-slate-200 bg-slate-50"><p class="font-bold text-slate-900">2. KLS IMER (Management Education)</p><p class="text-slate-500 text-[11px]">Full-time MBA & Management Programs — Belagavi</p></div>
+          <div class="p-2.5 rounded-lg border border-slate-200 bg-slate-50"><p class="font-bold text-slate-900">3. KLS Raja Lakhamgouda Law College</p><p class="text-slate-500 text-[11px]">3-Year LL.B & 5-Year B.A. LL.B — Belagavi</p></div>
+          <div class="p-2.5 rounded-lg border border-slate-200 bg-slate-50"><p class="font-bold text-slate-900">4. KLS Gogte College of Commerce (GCC)</p><p class="text-slate-500 text-[11px]">B.Com, BBA, BCA, M.Com & Pre-University — Belagavi</p></div>
+          <div class="p-2.5 rounded-lg border border-slate-200 bg-slate-50"><p class="font-bold text-slate-900">5. KLS Schools & Pre-University</p><p class="text-slate-500 text-[11px]">KLS Public School, B.K. Model School, PU Colleges</p></div>
+          <div class="p-2.5 rounded-lg border border-slate-200 bg-slate-50"><p class="font-bold text-slate-900">6. KLS VDIT, Haliyal</p><p class="text-slate-500 text-[11px]">Engineering & Technology Campus — Haliyal</p></div>
+        </div>
+      </div>
+
+      <div class="space-y-2.5 mb-5 text-xs">
+        <h4 class="font-bold text-slate-900 uppercase tracking-wider mb-1">Tiered Privilege Structure</h4>
+        <div class="p-3 rounded-lg border border-amber-200 bg-amber-50/70">
+          <p class="font-bold text-slate-900">Tier 1: Direct Kin (Children of Alumni)</p>
+          <p class="text-slate-600 mt-0.5"><strong>10% to 15% Tuition Concession</strong> under Institutional/Management Quota as an "Alumni Ward Legacy Scholarship", plus priority hostel allotment on campus.</p>
+        </div>
+        <div class="p-3 rounded-lg border border-emerald-200 bg-emerald-50/70">
+          <p class="font-bold text-slate-900">Tier 2: Immediate Siblings (Brothers / Sisters)</p>
+          <p class="text-slate-600 mt-0.5"><strong>5% to 10% Concession</strong> on tuition or flexible semester fee installment options across KLS degree and PU programs.</p>
+        </div>
+        <div class="p-3 rounded-lg border border-purple-200 bg-purple-50/70">
+          <p class="font-bold text-slate-900">Tier 3: Alumni Referrals & Counseling Desk</p>
+          <p class="text-slate-600 mt-0.5">Direct 1-on-1 admission counseling with senior faculty, fast-track document processing, and zero application fee for institutional quota.</p>
+        </div>
+      </div>
+
+      <div class="border-t border-slate-200 pt-4">
+        <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider mb-2">Request Admission Guidance / Department Endorsement</h4>
+        <form onsubmit="handleAdmissionRequest(event)" class="space-y-3 text-xs">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div><label class="block font-semibold text-slate-700 mb-1">Alumnus Name *</label><input type="text" id="admAlumniName" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
+            <div><label class="block font-semibold text-slate-700 mb-1">Graduation Batch *</label><input type="text" id="admBatch" placeholder="e.g., 2012-2016" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
+            <div><label class="block font-semibold text-slate-700 mb-1">Prospective Student's Name *</label><input type="text" id="admStudentName" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
+            <div><label class="block font-semibold text-slate-700 mb-1">Relationship *</label>
+              <select id="admRelation" class="w-full border border-slate-300 rounded-lg p-2">
+                <option value="Child (Son/Daughter)">Child (Son / Daughter)</option>
+                <option value="Sibling (Brother/Sister)">Sibling (Brother / Sister)</option>
+                <option value="Relative / Close Referral">Relative / Close Referral</option>
+              </select>
+            </div>
+            <div><label class="block font-semibold text-slate-700 mb-1">Target Institution *</label>
+              <select id="admTargetInst" class="w-full border border-slate-300 rounded-lg p-2">
+                <option value="KLS GIT (Engineering/MTech/MBA/MCA)">KLS GIT Belagavi (Engineering/MBA/MCA)</option>
+                <option value="KLS IMER (MBA)">KLS IMER Belagavi (MBA)</option>
+                <option value="KLS RL Law College (LL.B)">KLS RL Law College Belagavi</option>
+                <option value="KLS GCC / PU (B.Com/BBA/BCA/PU)">KLS Gogte College of Commerce / PU</option>
+                <option value="KLS Public School / High School">KLS Schools (Belagavi)</option>
+                <option value="KLS VDIT Haliyal">KLS VDIT Haliyal</option>
+              </select>
+            </div>
+            <div><label class="block font-semibold text-slate-700 mb-1">Phone / WhatsApp *</label><input type="text" id="admPhone" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
+          </div>
+          <div><label class="block font-semibold text-slate-700 mb-1">Course Interested In & Notes</label><input type="text" id="admCourse" placeholder="e.g., B.E. Computer Science, MBA, 11th Science" class="w-full border border-slate-300 rounded-lg p-2" /></div>
+          <div class="flex justify-end gap-2 pt-2">
+            <button type="button" onclick="closeModal('admissionModal')" class="px-4 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 rounded-lg">Close</button>
+            <button type="submit" class="px-4 py-2 text-xs font-semibold text-white bg-amber-600 hover:bg-amber-700 rounded-lg">Submit Endorsement Request</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <div id="perksModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl relative border border-slate-100 max-h-[90vh] overflow-y-auto">
       <button onclick="closeModal('perksModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-lg">✕</button>
       <div class="flex items-center gap-3 mb-4">
-        <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-2xl font-bold">
-          🎁
-        </div>
+        <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-2xl font-bold">🎁</div>
         <div>
           <h3 class="font-bold text-slate-900 text-lg">Alumni Privileges & Campus Benefits</h3>
           <p class="text-xs text-slate-500">Exclusive recognition and campus access for contributing KLS GIT ISE alumni.</p>
         </div>
       </div>
-
-      <div class="space-y-3.5 text-xs text-slate-700">
-        <div class="p-3.5 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200">
-          <div class="flex items-start gap-2.5">
-            <span class="text-xl">🎟️</span>
-            <div>
-              <h4 class="font-bold text-slate-900 text-sm">AURA National Cultural Fest — VIP Alumni Passes</h4>
-              <p class="text-slate-600 mt-0.5">Active alumni delivering webinars or mentoring receive <strong>2 Complimentary VIP Passes</strong> to KLS GIT's flagship national festival, <em>AURA</em>, with reserved seating at the Open Air Amphitheatre.</p>
-            </div>
-          </div>
+      <div class="space-y-3 text-xs text-slate-700">
+        <div class="p-3 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 cursor-pointer" onclick="closeModal('perksModal'); openModal('admissionModal');">
+          <h4 class="font-bold text-slate-900 text-sm">🎓 KLS Trust Kinship & Admission Concessions (Click for Details)</h4>
+          <p class="text-slate-600 mt-0.5">Tuition concessions and priority admission guidance for family across KLS GIT, IMER, Law College, GCC, and Schools.</p>
         </div>
-
-        <div class="p-3.5 rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200">
-          <div class="flex items-start gap-2.5">
-            <span class="text-xl">🏢</span>
-            <div>
-              <h4 class="font-bold text-slate-900 text-sm">Campus Executive Guest House Stay & Dining</h4>
-              <p class="text-slate-600 mt-0.5">Alumni visiting Belagavi for on-campus guest lectures, hackathon judging, or board reviews are hosted with <strong>1–2 Days Complimentary Stay & Dining</strong> at the GIT VIP Campus Guest House.</p>
-            </div>
-          </div>
+        <div class="p-3 rounded-xl bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200">
+          <h4 class="font-bold text-slate-900 text-sm">🎟️ AURA National Cultural Fest — VIP Alumni Passes</h4>
+          <p class="text-slate-600 mt-0.5">Active alumni receive 2 Complimentary VIP Passes to AURA with reserved amphitheatre seating.</p>
         </div>
-
-        <div class="p-3.5 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200">
-          <div class="flex items-start gap-2.5">
-            <span class="text-xl">🎯</span>
-            <div>
-              <h4 class="font-bold text-slate-900 text-sm">Direct Talent Pipeline & Campus Hiring Priority</h4>
-              <p class="text-slate-600 mt-0.5">Alumni founders and hiring managers get first-track access to pre-final and final-year ISE students for internships, campus referrals, and pre-placement interviews.</p>
-            </div>
-          </div>
+        <div class="p-3 rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200">
+          <h4 class="font-bold text-slate-900 text-sm">🏢 Campus Executive Guest House Stay & Dining</h4>
+          <p class="text-slate-600 mt-0.5">Complimentary 1–2 Days Stay at the GIT VIP Guest House when visiting for campus talks or judging.</p>
         </div>
-
-        <div class="p-3.5 rounded-xl bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200">
-          <div class="flex items-start gap-2.5">
-            <span class="text-xl">📜</span>
-            <div>
-              <h4 class="font-bold text-slate-900 text-sm">Institutional Felicitation & Industry Advisor Citation</h4>
-              <p class="text-slate-600 mt-0.5">Formal certificate of appreciation from the Principal & HoD, inclusion in Department Advisory Board (DAB) / BoS consultations, and public recognition on official college media channels.</p>
-            </div>
-          </div>
+        <div class="p-3 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200">
+          <h4 class="font-bold text-slate-900 text-sm">🎯 Direct Talent Pipeline & Campus Hiring Priority</h4>
+          <p class="text-slate-600 mt-0.5">Priority campus placement access to hire pre-final and final-year ISE students for internships.</p>
         </div>
-
-        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
-          <div class="flex items-start gap-2.5">
-            <span class="text-xl">📚</span>
-            <div>
-              <h4 class="font-bold text-slate-900 text-sm">Lifelong Incubation & Digital Library Access</h4>
-              <p class="text-slate-600 mt-0.5">Alumni entrepreneurs receive free access to the KLS GIT Incubation Center (EDC), co-working spaces during campus visits, and IEEE digital library access.</p>
-            </div>
-          </div>
+        <div class="p-3 rounded-xl bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200">
+          <h4 class="font-bold text-slate-900 text-sm">📜 Department Advisory Board (DAB) / BoS Recognition</h4>
+          <p class="text-slate-600 mt-0.5">Formal certificate of appreciation from Principal & HoD, and inclusion in curriculum advisory consultations.</p>
         </div>
       </div>
-
       <div class="mt-5 flex justify-end">
         <button onclick="closeModal('perksModal')" class="px-4 py-2 text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-lg">Got It</button>
       </div>
     </div>
   </div>
 
-  <!-- Connect / Request Talk Modal -->
   <div id="connectModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative border border-slate-100">
       <button onclick="closeModal('connectModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-lg">✕</button>
@@ -267,109 +258,60 @@
         </div>
       </div>
       <form onsubmit="handleConnectSubmit(event)">
-        <div class="space-y-3.5 text-sm">
+        <div class="space-y-3 text-sm">
           <div>
             <label class="block text-xs font-semibold text-slate-600 mb-1">Interaction Intent</label>
-            <select id="connectIntent" class="w-full border border-slate-300 rounded-lg p-2 text-xs focus:ring-2 focus:ring-brand-500" required>
+            <select id="connectIntent" class="w-full border border-slate-300 rounded-lg p-2 text-xs">
               <option value="Department Guest Lecture / Webinar">Invite for Department Guest Lecture / Webinar</option>
               <option value="In-Person Campus Session (50 Km / 100 Km Club)">In-Person Campus Session / Hackathon Judge (Local / Regional)</option>
               <option value="Student Career & Placement Mentorship">Student Career & Placement Mentorship</option>
               <option value="Final Year Project Review / Judge">Project Review / Hackathon Judge</option>
-              <option value="Informal Alumni Catchup / Referral Inquiry">Informal Alumni Catchup / Referral Inquiry</option>
             </select>
           </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-600 mb-1">Your Name & Role</label>
-            <input type="text" id="connectSender" placeholder="e.g., Prof. Upparamani / Student (5th Sem ISE)" class="w-full border border-slate-300 rounded-lg p-2 text-xs focus:ring-2 focus:ring-brand-500" required />
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-600 mb-1">Your Email / Contact</label>
-            <input type="text" id="connectContact" placeholder="Your email or phone" class="w-full border border-slate-300 rounded-lg p-2 text-xs focus:ring-2 focus:ring-brand-500" required />
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-600 mb-1">Proposed Topic / Message</label>
-            <textarea id="connectMessage" rows="3" placeholder="Brief outline of the topic or invitation..." class="w-full border border-slate-300 rounded-lg p-2 text-xs focus:ring-2 focus:ring-brand-500" required></textarea>
-          </div>
+          <div><label class="block text-xs font-semibold text-slate-600 mb-1">Your Name & Role</label><input type="text" id="connectSender" class="w-full border border-slate-300 rounded-lg p-2 text-xs" required /></div>
+          <div><label class="block text-xs font-semibold text-slate-600 mb-1">Your Contact</label><input type="text" id="connectContact" class="w-full border border-slate-300 rounded-lg p-2 text-xs" required /></div>
+          <div><label class="block text-xs font-semibold text-slate-600 mb-1">Proposed Topic / Message</label><textarea id="connectMessage" rows="3" class="w-full border border-slate-300 rounded-lg p-2 text-xs" required></textarea></div>
         </div>
-        <div class="mt-5 flex justify-end gap-2">
+        <div class="mt-4 flex justify-end gap-2">
           <button type="button" onclick="closeModal('connectModal')" class="px-4 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 rounded-lg">Cancel</button>
-          <button type="submit" class="px-4 py-2 text-xs font-semibold text-white bg-brand-700 hover:bg-brand-800 rounded-lg shadow-sm">Send Request / Generate Invitation</button>
+          <button type="submit" class="px-4 py-2 text-xs font-semibold text-white bg-brand-700 hover:bg-brand-800 rounded-lg">Send Request</button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- Registration Modal -->
   <div id="registerModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl relative border border-slate-100 max-h-[90vh] overflow-y-auto">
       <button onclick="closeModal('registerModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-lg">✕</button>
       <div class="mb-4">
         <h3 class="font-bold text-slate-900 text-lg">ISE Alumni Registration Form</h3>
-        <p class="text-xs text-slate-500">Join the KLS GIT ISE global alumni directory and mentor current engineering students.</p>
+        <p class="text-xs text-slate-500">Join the KLS GIT ISE global alumni directory and access KLS Kinship privileges.</p>
       </div>
       <form onsubmit="handleRegisterSubmit(event)">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
-          <div class="sm:col-span-2">
-            <label class="block font-semibold text-slate-700 mb-1">Full Name *</label>
-            <input type="text" id="regName" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500" required />
-          </div>
-          <div>
-            <label class="block font-semibold text-slate-700 mb-1">USN (University Seat No.)</label>
-            <input type="text" id="regUSN" placeholder="e.g., 2GI15IS001" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500" />
-          </div>
-          <div>
-            <label class="block font-semibold text-slate-700 mb-1">Graduation Batch *</label>
-            <input type="text" id="regBatch" placeholder="e.g., 2017-2021" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500" required />
-          </div>
-          <div>
-            <label class="block font-semibold text-slate-700 mb-1">Current Job Title *</label>
-            <input type="text" id="regTitle" placeholder="e.g., Senior Software Engineer" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500" required />
-          </div>
-          <div>
-            <label class="block font-semibold text-slate-700 mb-1">Current Organization / Company *</label>
-            <input type="text" id="regCompany" placeholder="e.g., Google / Microsoft / Startup" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500" required />
-          </div>
-          <div>
-            <label class="block font-semibold text-slate-700 mb-1">City * (Used for 50 Km / 100 Km Club)</label>
-            <input type="text" id="regCity" placeholder="e.g., Belagavi / Hubballi / Bengaluru / Sydney" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500" required />
-          </div>
-          <div>
-            <label class="block font-semibold text-slate-700 mb-1">Country *</label>
-            <input type="text" id="regCountry" placeholder="e.g., India / Netherlands / Australia" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500" required />
-          </div>
-          <div class="sm:col-span-2">
-            <label class="block font-semibold text-slate-700 mb-1">LinkedIn Profile URL</label>
-            <input type="url" id="regLinkedin" placeholder="https://linkedin.com/in/..." class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500" />
-          </div>
-          <div class="sm:col-span-2">
-            <label class="block font-semibold text-slate-700 mb-1">Technical Domain / Core Skills</label>
-            <input type="text" id="regDomain" placeholder="e.g., Cloud, AI/ML, DevOps, IoT, Systems" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500" />
-          </div>
-          <div class="sm:col-span-2 bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2">
-            <p class="font-semibold text-slate-800">Ways you can engage with KLS GIT ISE:</p>
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" id="regMentor" checked class="w-4 h-4 text-brand-600 rounded" />
-              <span>Willing to mentor current pre-final & final year ISE students</span>
-            </label>
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" id="regTalk" checked class="w-4 h-4 text-brand-600 rounded" />
-              <span>Willing to deliver online technical talks / guest webinars</span>
-            </label>
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" id="regInPerson" checked class="w-4 h-4 text-brand-600 rounded" />
-              <span>Available for in-person campus visits / hackathon judging (50 Km / 100 Km Club)</span>
-            </label>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+          <div class="sm:col-span-2"><label class="block font-semibold text-slate-700 mb-1">Full Name *</label><input type="text" id="regName" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
+          <div><label class="block font-semibold text-slate-700 mb-1">USN</label><input type="text" id="regUSN" class="w-full border border-slate-300 rounded-lg p-2" /></div>
+          <div><label class="block font-semibold text-slate-700 mb-1">Graduation Batch *</label><input type="text" id="regBatch" placeholder="e.g., 2017-2021" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
+          <div><label class="block font-semibold text-slate-700 mb-1">Job Title *</label><input type="text" id="regTitle" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
+          <div><label class="block font-semibold text-slate-700 mb-1">Organization *</label><input type="text" id="regCompany" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
+          <div><label class="block font-semibold text-slate-700 mb-1">City *</label><input type="text" id="regCity" placeholder="Belagavi / Bengaluru / Sydney" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
+          <div><label class="block font-semibold text-slate-700 mb-1">Country *</label><input type="text" id="regCountry" placeholder="India / Netherlands / Australia" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
+          <div class="sm:col-span-2"><label class="block font-semibold text-slate-700 mb-1">LinkedIn URL</label><input type="url" id="regLinkedin" class="w-full border border-slate-300 rounded-lg p-2" /></div>
+          <div class="sm:col-span-2"><label class="block font-semibold text-slate-700 mb-1">Domain Skills</label><input type="text" id="regDomain" placeholder="e.g., Cloud, AI/ML, DevOps" class="w-full border border-slate-300 rounded-lg p-2" /></div>
+          <div class="sm:col-span-2 bg-slate-50 p-2.5 rounded-lg border border-slate-200 space-y-1.5">
+            <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="regMentor" checked class="w-4 h-4 text-brand-600 rounded" /><span>Willing to mentor ISE students</span></label>
+            <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="regTalk" checked class="w-4 h-4 text-brand-600 rounded" /><span>Willing to deliver online webinars</span></label>
+            <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="regInPerson" checked class="w-4 h-4 text-brand-600 rounded" /><span>Available for campus visits (50/100 Km Club)</span></label>
           </div>
         </div>
-        <div class="mt-5 flex justify-end gap-2">
+        <div class="mt-4 flex justify-end gap-2">
           <button type="button" onclick="closeModal('registerModal')" class="px-4 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 rounded-lg">Cancel</button>
-          <button type="submit" id="btnSubmitReg" class="px-4 py-2 text-xs font-semibold bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-lg shadow-sm">Submit Registration</button>
+          <button type="submit" id="btnSubmitReg" class="px-4 py-2 text-xs font-semibold bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-lg">Submit Registration</button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- Footer -->
   <footer class="bg-slate-900 text-slate-400 text-xs py-6 border-t border-slate-800 mt-auto">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
       <div>
@@ -379,53 +321,37 @@
       <div class="flex items-center gap-4">
         <a href="https://2025.git.edu/alumni/" target="_blank" class="text-amber-400 hover:underline">KLS GIT Alumni Cell</a>
         <span>•</span>
-        <a href="https://gitbelgaum.almaconnect.com/" target="_blank" class="text-amber-400 hover:underline">AlmaConnect</a>
+        <button onclick="openModal('admissionModal')" class="text-amber-400 hover:underline">Admission Benefits</button>
         <span>•</span>
         <button onclick="openModal('perksModal')" class="text-amber-400 hover:underline">Campus Privileges</button>
       </div>
     </div>
   </footer>
 
-  <!-- Core JavaScript Application Logic -->
   <script>
     const APPS_SCRIPT_API_URL = "https://script.google.com/macros/s/AKfycbwzku0AvQeJC2IJRQ0yZizWUOuRkGc7ixQy8ppwuBMhSwDX8GE5nqvABIsF6NOfDsXrYg/exec";
-    
-    // Seed records with Belagavi, Hubballi-Dharwad, Bengaluru, and Overseas alumni
     const INITIAL_ALUMNI = [{"id": "ise-01", "name": "Abhishek Joshi", "batch": "2015-2019", "passoutYear": 2019, "designation": "Software Engineer", "company": "Pelatro Solutions", "city": "Bengaluru", "country": "India", "linkedin": "http://linkedin.com/in/abhishek-joshi-94b88210a", "domain": "IoT, Computer Organization, Systems", "canMentor": true, "canGiveTalk": true, "pastEvent": "Expert Talk on Number Systems & IoT LoRa Networks"}, {"id": "ise-02", "name": "Sanjana Baliga", "batch": "2015-2019", "passoutYear": 2019, "designation": "Developer & UI Guide", "company": "PricewaterhouseCoopers (PwC - Salesforce India)", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/sanjanabaliga", "domain": "Salesforce, UI/UX, Cloud Applications", "canMentor": true, "canGiveTalk": true, "pastEvent": "Expert Talk on Salesforce Platform Careers"}, {"id": "ise-03", "name": "Vasavi Dixit", "batch": "2015-2019", "passoutYear": 2019, "designation": "Senior Software Engineer", "company": "Subex", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/vasavi-dixit-363138136/", "domain": "Telecom Software, Enterprise Engineering", "canMentor": true, "canGiveTalk": false, "pastEvent": "Department Poster Design Judge"}, {"id": "ise-04", "name": "Tejas Patkar", "batch": "2016-2020", "passoutYear": 2020, "designation": "Software Engineer", "company": "PricewaterhouseCoopers (PwC - Salesforce India)", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/tejaspatkar", "domain": "Cloud Solutions, Enterprise CRM", "canMentor": true, "canGiveTalk": true, "pastEvent": "Webinar on Placement Awareness for Pre-Final Years"}, {"id": "ise-05", "name": "Chinmay Yelamali", "batch": "2014-2018", "passoutYear": 2018, "designation": "Software Engineer", "company": "MetricStream", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/chinmayyalameli/", "domain": "GRC Software, Product Engineering", "canMentor": true, "canGiveTalk": false, "pastEvent": "Department Event Judge"}, {"id": "ise-06", "name": "Veena Badmi", "batch": "2012-2016", "passoutYear": 2016, "designation": "Software Engineer", "company": "Microsoft India (R&D)", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/veena-badmi-38485ba1", "domain": "Distributed Systems, Cloud Platforms", "canMentor": true, "canGiveTalk": true, "pastEvent": "Webinar on Placement & Tech Career Guidance"}, {"id": "ise-07", "name": "Upendra B", "batch": "2012-2016", "passoutYear": 2016, "designation": "Senior Data Analyst", "company": "Tesco", "city": "Bengaluru", "country": "India", "linkedin": "", "domain": "Data Analytics, Retail AI, Business Intelligence", "canMentor": true, "canGiveTalk": true, "pastEvent": "Expert talk on AI Challenges and Applications in IT"}, {"id": "ise-08", "name": "Chetan S P", "batch": "2010-2014", "passoutYear": 2014, "designation": "Software Engineer", "company": "Deloitte USI", "city": "Bengaluru", "country": "India", "linkedin": "", "domain": "Big Data Management, Enterprise Data Architecture", "canMentor": true, "canGiveTalk": true, "pastEvent": "Expert Talk on Real-time Big Data Management"}, {"id": "ise-09", "name": "Nitish Hegde", "batch": "2010-2014", "passoutYear": 2014, "designation": "Software Engineer", "company": "Juniper Networks", "city": "Bengaluru", "country": "India", "linkedin": "", "domain": "Networking Protocols, Hardware Workflow", "canMentor": true, "canGiveTalk": true, "pastEvent": "Expert Talk on Networking Devices & Workflow Management"}, {"id": "ise-10", "name": "Chaitanya Hebbal", "batch": "2009-2013", "passoutYear": 2013, "designation": "Technical Specialist", "company": "Hexagon & MSC Software Development", "city": "Pune", "country": "India", "linkedin": "", "domain": "Autonomy, Robotics, Computer Vision, Simulation", "canMentor": true, "canGiveTalk": true, "pastEvent": "Technical Talk on AI - Autonomy in Self Driving Cars & Robots"}, {"id": "ise-11", "name": "Praveen Hondad", "batch": "2009-2013", "passoutYear": 2013, "designation": "Data Scientist", "company": "Infosys", "city": "Bengaluru / Hubballi", "country": "India", "linkedin": "https://www.linkedin.com/in/praveen-hondad-b088b6a1/", "domain": "Data Science, Machine Learning, Analytics", "canMentor": true, "canGiveTalk": true, "pastEvent": "Expert Talk on Data Science & Department Evaluation"}, {"id": "ise-12", "name": "Sumeet Shahpeti", "batch": "2008-2012", "passoutYear": 2012, "designation": "Senior SAP Consultant", "company": "Bristlecone", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/sumeetshahapeti/", "domain": "Enterprise ERP, Supply Chain, SAP S/4HANA", "canMentor": true, "canGiveTalk": false, "pastEvent": "Judge for Poster Design & Hackathon"}, {"id": "ise-13", "name": "Rudresh Katagi", "batch": "2008-2012", "passoutYear": 2012, "designation": "Senior Database Developer", "company": "Verna Networks", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/rudresh-katagi-589a0153", "domain": "Database Engineering, Python, Backend Optimization", "canMentor": true, "canGiveTalk": true, "pastEvent": "Expert Session on Database Programming using Python"}, {"id": "ise-14", "name": "Sandeep Hegde", "batch": "2006-2010", "passoutYear": 2010, "designation": "Growth, Marketing & Startup Consultant", "company": "Independent / Venture Consulting", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/sandeephegde", "domain": "Product Growth, Startup Mentorship, Digital Marketing", "canMentor": true, "canGiveTalk": true, "pastEvent": "Startup Incubation & Entrepreneurship Mentor"}, {"id": "ise-15", "name": "Purushottam Deshpande", "batch": "2003-2007", "passoutYear": 2007, "designation": "Engineering Manager", "company": "Decision Resources Group (DRG)", "city": "Bengaluru", "country": "India", "linkedin": "https://www.linkedin.com/in/phdeshpande", "domain": "Modern JavaScript (ES6+), Data Structures, Engineering Leadership", "canMentor": true, "canGiveTalk": true, "pastEvent": "Talks on ES6 JavaScript and Data Structures in Software Dev"}, {"id": "ise-16", "name": "Aditya Deshpande", "batch": "2007-2011", "passoutYear": 2011, "designation": "Senior Lithography Systems Specialist", "company": "High-Tech Manufacturing (Semiconductor)", "city": "Eindhoven, Noord-Brabant", "country": "Netherlands", "linkedin": "", "domain": "Dry Lithography, Semiconductor Tech, International Engineering", "canMentor": true, "canGiveTalk": true, "pastEvent": "Global Alumni Chapter (Europe Outreach)"}, {"id": "ise-17", "name": "Dundappa Hulkund", "batch": "2009-2013", "passoutYear": 2013, "designation": "Big Data Specialist", "company": "Billigence (ex-Wipro)", "city": "Sydney, New South Wales", "country": "Australia", "linkedin": "", "domain": "Big Data, Data Warehousing, Cloud Analytics", "canMentor": true, "canGiveTalk": true, "pastEvent": "Global Alumni Chapter (Australia Outreach)"}, {"id": "ise-18", "name": "Madhuri Kulkarni", "batch": "2010-2014", "passoutYear": 2014, "designation": "Digital Solutions Specialist", "company": "CHE Proximity", "city": "Sydney", "country": "Australia", "linkedin": "", "domain": "Digital Strategy, Customer Experience Engineering", "canMentor": true, "canGiveTalk": true, "pastEvent": "Global Alumni Chapter (Australia Outreach)"}, {"id": "ise-19", "name": "Poonam Havnoor", "batch": "2013-2017", "passoutYear": 2017, "designation": "Software Development Engineer", "company": "Amazon", "city": "Bengaluru", "country": "India", "linkedin": "", "domain": "Cloud Infrastructure, Distributed Systems, AWS", "canMentor": true, "canGiveTalk": true, "pastEvent": "Campus Placement Drive Preparations"}, {"id": "ise-20", "name": "Surendra Kumar Deshpande", "batch": "2011-2015", "passoutYear": 2015, "designation": "Lead DevOps Architect", "company": "Enterprise Tech Solutions", "city": "Bengaluru", "country": "India", "linkedin": "", "domain": "DevOps, CI/CD, Kubernetes, Cloud Infrastructure", "canMentor": true, "canGiveTalk": true, "pastEvent": "DevOps Career Workshop"}, {"id": "ise-loc-01", "name": "Prof. Shrinidhi Kulkarni", "batch": "2005-2009", "passoutYear": 2009, "designation": "Tech Lead & Solutions Architect", "company": "Quanteon Solutions / Tech Consultant", "city": "Belagavi", "country": "India", "linkedin": "", "domain": "Full Stack Architecture, Cloud, Microservices", "canMentor": true, "canGiveTalk": true, "pastEvent": "Campus Tech Workshop Speaker"}, {"id": "ise-loc-02", "name": "Vinayak Patil", "batch": "2013-2017", "passoutYear": 2017, "designation": "Founder & Director", "company": "AgroTech Robotics / Belagavi Foundry IT", "city": "Belagavi", "country": "India", "linkedin": "", "domain": "Embedded Systems, Industrial IoT, Automation", "canMentor": true, "canGiveTalk": true, "pastEvent": "Local Industry Interaction"}, {"id": "ise-loc-03", "name": "Deepa Joshi", "batch": "2011-2015", "passoutYear": 2015, "designation": "Senior Data Engineer", "company": "Tata Consultancy Services", "city": "Hubballi", "country": "India", "linkedin": "", "domain": "Data Warehousing, ETL, Snowflake", "canMentor": true, "canGiveTalk": true, "pastEvent": "Online Career Session"}, {"id": "ise-loc-04", "name": "Sachin Kulkarni", "batch": "2014-2018", "passoutYear": 2018, "designation": "Senior QA Automation Lead", "company": "Kalyani Tech / Kolhapur Engineering", "city": "Kolhapur", "country": "India", "linkedin": "", "domain": "Selenium, Cypress, Performance Engineering", "canMentor": true, "canGiveTalk": true, "pastEvent": "Alumni Meet Contributor"}];
 
     let alumniData = [];
-    let currentView = 'grid'; // 'grid' | 'batch' | 'global'
-    let currentRadiusClub = 'ALL'; // 'ALL' | '50KM' | '100KM' | 'OVERSEAS'
+    let currentView = 'grid';
+    let currentRadiusClub = 'ALL';
     let selectedAlumnus = null;
 
-    // Helper to identify geographic proximity to Belagavi (GIT Udyambag)
     function getAlumniClub(a) {
       const city = (a.city || '').toLowerCase();
       const country = (a.country || '').toLowerCase();
-      
       const c50 = ['belagavi', 'belgaum', 'udyambag', 'khanapur', 'bailhongal', 'kittur', 'gokak', 'hukkeri', 'sankeshwar', 'chikodi', 'chikkodi'];
       const c100 = ['hubballi', 'hubli', 'dharwad', 'kolhapur', 'nippani', 'nipani', 'dandeli', 'bagalkot', 'gadag', 'sawantwadi', 'goa'];
-
-      for (let c of c50) {
-        if (city.includes(c)) return '50KM';
-      }
-      for (let c of c100) {
-        if (city.includes(c)) return '100KM';
-      }
-      if (country && country !== 'india') {
-        return 'OVERSEAS';
-      }
+      for (let c of c50) { if (city.includes(c)) return '50KM'; }
+      for (let c of c100) { if (city.includes(c)) return '100KM'; }
+      if (country && country !== 'india') return 'OVERSEAS';
       return 'METRO';
     }
 
     async function init() {
       const stored = localStorage.getItem('kls_git_ise_alumni');
       if (stored) {
-        try {
-          alumniData = JSON.parse(stored);
-        } catch(e) {
-          alumniData = [...INITIAL_ALUMNI];
-        }
+        try { alumniData = JSON.parse(stored); } catch(e) { alumniData = [...INITIAL_ALUMNI]; }
       } else {
         alumniData = [...INITIAL_ALUMNI];
         saveData();
@@ -454,15 +380,11 @@
               render();
             }
           }
-        } catch (err) {
-          console.warn('Live API sync note: using cached data', err);
-        }
+        } catch (err) { console.warn('API note: using cached data', err); }
       }
     }
 
-    function saveData() {
-      localStorage.setItem('kls_git_ise_alumni', JSON.stringify(alumniData));
-    }
+    function saveData() { localStorage.setItem('kls_git_ise_alumni', JSON.stringify(alumniData)); }
 
     function populateBatchFilter() {
       const batchSelect = document.getElementById('batchFilter');
@@ -494,17 +416,6 @@
 
     function setRadiusClub(club) {
       currentRadiusClub = club;
-      
-      const btnAll = document.getElementById('btn-radius-all');
-      const btn50 = document.getElementById('btn-radius-50');
-      const btn100 = document.getElementById('btn-radius-100');
-      const btnOverseas = document.getElementById('btn-radius-overseas');
-
-      btnAll.className = club === 'ALL' ? 'px-3 py-1 rounded-full text-xs font-semibold bg-brand-700 text-white shadow-xs transition' : 'px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition';
-      btn50.className = club === '50KM' ? 'px-3 py-1 rounded-full text-xs font-semibold bg-emerald-700 text-white shadow-xs transition flex items-center gap-1' : 'px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-300 hover:bg-emerald-100 transition flex items-center gap-1';
-      btn100.className = club === '100KM' ? 'px-3 py-1 rounded-full text-xs font-semibold bg-blue-700 text-white shadow-xs transition flex items-center gap-1' : 'px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-800 border border-blue-300 hover:bg-blue-100 transition flex items-center gap-1';
-      btnOverseas.className = club === 'OVERSEAS' ? 'px-3 py-1 rounded-full text-xs font-semibold bg-amber-600 text-white shadow-xs transition flex items-center gap-1' : 'px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-300 hover:bg-amber-100 transition flex items-center gap-1';
-
       render();
     }
 
@@ -542,28 +453,15 @@
 
     function updateStats(filtered) {
       document.getElementById('stat-total').textContent = alumniData.length;
-      const count50 = alumniData.filter(a => getAlumniClub(a) === '50KM').length;
-      document.getElementById('stat-50km').textContent = count50;
-      const count100 = alumniData.filter(a => getAlumniClub(a) === '100KM' || getAlumniClub(a) === '50KM').length;
-      document.getElementById('stat-100km').textContent = count100;
-      const uniqueBatches = new Set(alumniData.map(a => a.batch)).size;
-      document.getElementById('stat-batches').textContent = `${uniqueBatches} Batches`;
-      const volunteers = alumniData.filter(a => a.canMentor || a.canGiveTalk).length;
-      document.getElementById('stat-volunteers').textContent = volunteers;
+      document.getElementById('stat-50km').textContent = alumniData.filter(a => getAlumniClub(a) === '50KM').length;
+      document.getElementById('stat-100km').textContent = alumniData.filter(a => getAlumniClub(a) === '100KM' || getAlumniClub(a) === '50KM').length;
+      document.getElementById('stat-batches').textContent = `${new Set(alumniData.map(a => a.batch)).size} Batches`;
+      document.getElementById('stat-volunteers').textContent = alumniData.filter(a => a.canMentor || a.canGiveTalk).length;
       document.getElementById('showing-count').textContent = filtered.length;
     }
 
     function setViewMode(mode) {
       currentView = mode;
-      document.getElementById('btn-grid').className = mode === 'grid' 
-        ? 'px-3 py-1.5 rounded-md font-medium text-slate-800 bg-white shadow-sm'
-        : 'px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-slate-900';
-      document.getElementById('btn-batch').className = mode === 'batch'
-        ? 'px-3 py-1.5 rounded-md font-medium text-slate-800 bg-white shadow-sm'
-        : 'px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-slate-900';
-      document.getElementById('btn-global').className = mode === 'global'
-        ? 'px-3 py-1.5 rounded-md font-medium text-slate-800 bg-white shadow-sm'
-        : 'px-3 py-1.5 rounded-md font-medium text-slate-600 hover:text-slate-900';
       render();
     }
 
@@ -575,9 +473,7 @@
       setRadiusClub('ALL');
     }
 
-    function getInitials(name) {
-      return (name || 'A').split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
-    }
+    function getInitials(name) { return (name || 'A').split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase(); }
 
     function render() {
       const filtered = getFilteredData();
@@ -585,219 +481,111 @@
       const container = document.getElementById('viewContainer');
 
       if (filtered.length === 0) {
-        container.innerHTML = `
-          <div class="bg-white rounded-xl p-12 text-center border border-slate-200">
-            <h4 class="text-base font-semibold text-slate-800">No Alumni in this Proximity / Filter</h4>
-            <p class="text-xs text-slate-500 mt-1">Try selecting 'All Locations' or invite local Belagavi/Hubballi alumni to register.</p>
-            <button onclick="resetFilters()" class="mt-3 px-3 py-1.5 bg-brand-50 text-brand-700 rounded-lg text-xs font-semibold">View All Alumni</button>
-          </div>
-        `;
+        container.innerHTML = `<div class="bg-white rounded-xl p-12 text-center border border-slate-200"><h4 class="text-base font-semibold text-slate-800">No Alumni in this Proximity / Filter</h4><p class="text-xs text-slate-500 mt-1">Try selecting 'All Locations' or invite local alumni to register.</p></div>`;
         return;
       }
 
-      if (currentView === 'grid') {
-        renderGridView(filtered, container);
-      } else if (currentView === 'batch') {
-        renderBatchView(filtered, container);
-      } else if (currentView === 'global') {
-        renderGlobalView(filtered, container);
-      }
+      if (currentView === 'grid') renderGridView(filtered, container);
+      else if (currentView === 'batch') renderBatchView(filtered, container);
+      else if (currentView === 'global') renderGlobalView(filtered, container);
     }
 
     function renderGridView(items, container) {
-      container.innerHTML = `
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          ${items.map(item => {
-            const club = getAlumniClub(item);
-            return `
-            <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
-              <div>
-                <div class="flex items-start justify-between gap-3 mb-2.5">
-                  <div class="flex items-center gap-3">
-                    <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-700 to-blue-500 text-white font-bold flex items-center justify-center text-sm shadow-sm flex-shrink-0">
-                      ${getInitials(item.name)}
-                    </div>
-                    <div>
-                      <h4 class="font-bold text-slate-900 text-sm leading-tight">${item.name}</h4>
-                      <p class="text-xs text-slate-500">${item.designation || 'Alumnus'}</p>
-                    </div>
-                  </div>
-                  <span class="badge bg-blue-50 text-brand-700 border border-blue-100 flex-shrink-0">Batch ${item.batch}</span>
+      container.innerHTML = `<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        ${items.map(item => {
+          const club = getAlumniClub(item);
+          return `
+          <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+            <div>
+              <div class="flex items-start justify-between gap-3 mb-2.5">
+                <div class="flex items-center gap-3">
+                  <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-700 to-blue-500 text-white font-bold flex items-center justify-center text-sm shadow-sm flex-shrink-0">${getInitials(item.name)}</div>
+                  <div><h4 class="font-bold text-slate-900 text-sm leading-tight">${item.name}</h4><p class="text-xs text-slate-500">${item.designation || 'Alumnus'}</p></div>
                 </div>
-
-                <div class="space-y-1.5 text-xs text-slate-600 mt-3 pt-3 border-t border-slate-100">
-                  <div class="flex items-center gap-1.5 font-medium text-slate-800">
-                    <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-                    <span>${item.company || 'Not Specified'}</span>
-                  </div>
-                  <div class="flex items-center gap-1.5">
-                    <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
-                    <span>${item.city ? `${item.city}, ` : ''}${item.country}</span>
-                  </div>
-                  ${item.domain ? `
-                    <div class="flex items-center gap-1.5 text-slate-500">
-                      <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                      <span class="truncate">${item.domain}</span>
-                    </div>
-                  ` : ''}
-                </div>
-
-                <div class="flex flex-wrap gap-1.5 mt-3 pt-2">
-                  ${club === '50KM' ? `<span class="badge bg-emerald-100 text-emerald-900 border border-emerald-300 font-bold">📍 50 Km Club (Belagavi)</span>` : ''}
-                  ${club === '100KM' ? `<span class="badge bg-blue-100 text-blue-900 border border-blue-300 font-bold">🚗 100 Km Club (Regional)</span>` : ''}
-                  ${club === 'OVERSEAS' ? `<span class="badge bg-amber-50 text-amber-800 border border-amber-200">🌍 Overseas Chapter</span>` : ''}
-                  ${item.canMentor ? `<span class="badge bg-slate-100 text-slate-700">🤝 Mentor</span>` : ''}
-                  ${item.canGiveTalk ? `<span class="badge bg-indigo-50 text-indigo-700">🎤 Speaker</span>` : ''}
-                </div>
+                <span class="badge bg-blue-50 text-brand-700 border border-blue-100 flex-shrink-0">Batch ${item.batch}</span>
               </div>
-
-              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
-                ${item.linkedin ? `
-                  <a href="${item.linkedin}" target="_blank" class="text-xs text-brand-600 hover:text-brand-800 font-semibold flex items-center gap-1">
-                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                    LinkedIn
-                  </a>
-                ` : `<span class="text-xs text-slate-400 italic">No link</span>`}
-                <button onclick="openConnectModal('${item.id}')" class="text-xs bg-slate-900 hover:bg-brand-700 text-white font-medium px-2.5 py-1.5 rounded-lg transition-colors">
-                  ${club === '50KM' ? 'Invite to Campus' : 'Connect / Talk'}
-                </button>
+              <div class="space-y-1.5 text-xs text-slate-600 mt-3 pt-3 border-t border-slate-100">
+                <div class="font-medium text-slate-800">🏢 ${item.company || 'Not Specified'}</div>
+                <div>📍 ${item.city ? `${item.city}, ` : ''}${item.country}</div>${item.domain ? `<div class="text-slate-500 truncate">💡 ${item.domain}</div>` : ''}
+              </div>
+              <div class="flex flex-wrap gap-1.5 mt-3 pt-2">
+                ${club === '50KM' ? `<span class="badge bg-emerald-100 text-emerald-900 border border-emerald-300 font-bold">📍 50 Km Club (Belagavi)</span>` : ''}
+                ${club === '100KM' ? `<span class="badge bg-blue-100 text-blue-900 border border-blue-300 font-bold">🚗 100 Km Club (Regional)</span>` : ''}
+                ${club === 'OVERSEAS' ? `<span class="badge bg-amber-50 text-amber-800 border border-amber-200">🌍 Overseas Chapter</span>` : ''}
+                ${item.canMentor ? `<span class="badge bg-slate-100 text-slate-700">🤝 Mentor</span>` : ''}
+                ${item.canGiveTalk ? `<span class="badge bg-indigo-50 text-indigo-700">🎤 Speaker</span>` : ''}
               </div>
             </div>
-            `;
-          }).join('')}
-        </div>
-      `;
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+              ${item.linkedin ? `<a href="${item.linkedin}" target="_blank" class="text-xs text-brand-600 hover:text-brand-800 font-semibold">LinkedIn &rarr;</a>` : `<span class="text-xs text-slate-400 italic">No link</span>`}
+              <button onclick="openConnectModal('${item.id}')" class="text-xs bg-slate-900 hover:bg-brand-700 text-white font-medium px-2.5 py-1.5 rounded-lg transition-colors">
+                ${club === '50KM' ? 'Invite to Campus' : 'Connect / Talk'}
+              </button>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>`;
     }
 
     function renderBatchView(items, container) {
       const grouped = {};
-      items.forEach(item => {
-        if (!grouped[item.batch]) grouped[item.batch] = [];
-        grouped[item.batch].push(item);
-      });
-
+      items.forEach(item => { if (!grouped[item.batch]) grouped[item.batch] = []; grouped[item.batch].push(item); });
       const sortedBatches = Object.keys(grouped).sort().reverse();
-
-      container.innerHTML = `
-        <div class="space-y-6">
-          ${sortedBatches.map(batch => `
-            <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-              <div class="bg-gradient-to-r from-slate-100 to-white px-5 py-3 border-b border-slate-200 flex items-center justify-between">
-                <div class="flex items-center gap-2.5">
-                  <span class="w-3 h-3 rounded-full bg-brand-600"></span>
-                  <h3 class="font-bold text-slate-900 text-sm sm:text-base">Graduation Batch: ${batch}</h3>
-                  <span class="badge bg-slate-200 text-slate-700 text-xs">${grouped[batch].length} Alumni</span>
-                </div>
-              </div>
-              <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs">
-                  <thead class="bg-slate-50 text-slate-600 font-semibold border-b border-slate-200">
-                    <tr>
-                      <th class="py-2.5 px-4">Name</th>
-                      <th class="py-2.5 px-4">Current Role</th>
-                      <th class="py-2.5 px-4">Organization</th>
-                      <th class="py-2.5 px-4">Location & Club</th>
-                      <th class="py-2.5 px-4">Domain / Past Event</th>
-                      <th class="py-2.5 px-4 text-right">Connect</th>
-                    </tr>
-                  </thead>
-                  <tbody class="divide-y divide-slate-100">
-                    ${grouped[batch].map(alumnus => {
-                      const club = getAlumniClub(alumnus);
-                      return `
-                      <tr class="hover:bg-slate-50/80 transition-colors">
-                        <td class="py-3 px-4 font-semibold text-slate-900">
-                          <div class="flex items-center gap-2">
-                            <span>${alumnus.name}</span>
-                            ${alumnus.linkedin ? `<a href="${alumnus.linkedin}" target="_blank" class="text-blue-600 hover:text-blue-800"><svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>` : ''}
-                          </div>
-                        </td>
-                        <td class="py-3 px-4 text-slate-700">${alumnus.designation || 'Alumnus'}</td>
-                        <td class="py-3 px-4 text-slate-800 font-medium">${alumnus.company || 'Not Specified'}</td>
-                        <td class="py-3 px-4 text-slate-600">
-                          <div>${alumnus.city ? `${alumnus.city}, ` : ''}${alumnus.country}</div>
-                          ${club === '50KM' ? `<span class="badge bg-emerald-100 text-emerald-800 text-[10px] mt-0.5">📍 50 Km Club</span>` : ''}
-                          ${club === '100KM' ? `<span class="badge bg-blue-100 text-blue-800 text-[10px] mt-0.5">🚗 100 Km Club</span>` : ''}
-                        </td>
-                        <td class="py-3 px-4 text-slate-500">${alumnus.pastEvent || alumnus.domain || 'Alumni Contributor'}</td>
-                        <td class="py-3 px-4 text-right">
-                          <button onclick="openConnectModal('${alumnus.id}')" class="bg-brand-50 hover:bg-brand-100 text-brand-700 font-semibold px-2.5 py-1 rounded text-xs">
-                            ${club === '50KM' ? 'Invite to Campus' : 'Interact'}
-                          </button>
-                        </td>
-                      </tr>
-                      `;
-                    }).join('')}
-                  </tbody>
-                </table>
-              </div>
+      container.innerHTML = `<div class="space-y-6">
+        ${sortedBatches.map(batch => `
+          <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="bg-slate-100 px-5 py-3 border-b border-slate-200 flex items-center justify-between">
+              <h3 class="font-bold text-slate-900 text-sm sm:text-base">Graduation Batch: ${batch}</h3>
+              <span class="badge bg-slate-200 text-slate-700 text-xs">${grouped[batch].length} Alumni</span>
             </div>
-          `).join('')}
-        </div>
-      `;
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-slate-50 text-slate-600 font-semibold border-b border-slate-200">
+                  <tr><th class="py-2.5 px-4">Name</th><th class="py-2.5 px-4">Current Role</th><th class="py-2.5 px-4">Organization</th><th class="py-2.5 px-4">Location & Club</th><th class="py-2.5 px-4 text-right">Connect</th></tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                  ${grouped[batch].map(alumnus => {
+                    const club = getAlumniClub(alumnus);
+                    return `<tr class="hover:bg-slate-50/80">
+                      <td class="py-3 px-4 font-semibold text-slate-900">${alumnus.name}</td>
+                      <td class="py-3 px-4 text-slate-700">${alumnus.designation || 'Alumnus'}</td>
+                      <td class="py-3 px-4 text-slate-800 font-medium">${alumnus.company || 'Not Specified'}</td>
+                      <td class="py-3 px-4 text-slate-600">${alumnus.city ? `${alumnus.city}, ` : ''}${alumnus.country} ${club === '50KM' ? '📍' : club === '100KM' ? '🚗' : ''}</td>
+                      <td class="py-3 px-4 text-right"><button onclick="openConnectModal('${alumnus.id}')" class="bg-brand-50 hover:bg-brand-100 text-brand-700 font-semibold px-2.5 py-1 rounded text-xs">Interact</button></td>
+                    </tr>`;
+                  }).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `).join('')}
+      </div>`;
     }
 
     function renderGlobalView(items, container) {
       const groupedByCountry = {};
-      items.forEach(item => {
-        const c = item.country || 'Other';
-        if (!groupedByCountry[c]) groupedByCountry[c] = [];
-        groupedByCountry[c].push(item);
-      });
-
-      const countries = Object.keys(groupedByCountry).sort((a,b) => {
-        if (a === 'India') return -1;
-        if (b === 'India') return 1;
-        return a.localeCompare(b);
-      });
-
-      container.innerHTML = `
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-          ${countries.map(c => `
-            <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
-                  <div class="flex items-center gap-2">
-                    <span class="text-xl">${c === 'India' ? '🇮🇳' : c === 'Netherlands' ? '🇳🇱' : c === 'Australia' ? '🇦🇺' : c === 'USA' ? '🇺🇸' : '🌐'}</span>
-                    <h3 class="font-bold text-slate-900 text-sm">${c} Chapter</h3>
-                  </div>
-                  <span class="badge bg-amber-50 text-amber-800 border border-amber-200 font-bold">${groupedByCountry[c].length} Alumni</span>
-                </div>
-                <ul class="space-y-2.5">
-                  ${groupedByCountry[c].map(a => {
-                    const club = getAlumniClub(a);
-                    return `
-                    <li class="p-2.5 rounded-lg bg-slate-50 hover:bg-slate-100/80 transition flex items-center justify-between text-xs">
-                      <div>
-                        <p class="font-semibold text-slate-900">${a.name}</p>
-                        <p class="text-slate-500">${a.designation} • ${a.company}</p>
-                        <div class="flex items-center gap-1.5 mt-0.5">
-                          <span class="text-slate-400 text-[11px]">${a.city}</span>
-                          ${club === '50KM' ? `<span class="badge bg-emerald-100 text-emerald-800 text-[9px] py-0">📍 50km</span>` : ''}
-                          ${club === '100KM' ? `<span class="badge bg-blue-100 text-blue-800 text-[9px] py-0">🚗 100km</span>` : ''}
-                        </div>
-                      </div>
-                      <button onclick="openConnectModal('${a.id}')" class="text-[11px] bg-white border border-slate-200 text-slate-700 px-2 py-1 rounded shadow-2xs hover:bg-brand-50 hover:text-brand-700">
-                        Connect
-                      </button>
-                    </li>
-                    `;
-                  }).join('')}
-                </ul>
-              </div>
+      items.forEach(item => { const c = item.country || 'Other'; if (!groupedByCountry[c]) groupedByCountry[c] = []; groupedByCountry[c].push(item); });
+      const countries = Object.keys(groupedByCountry).sort((a,b) => (a === 'India' ? -1 : b === 'India' ? 1 : a.localeCompare(b)));
+      container.innerHTML = `<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        ${countries.map(c => `
+          <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+              <h3 class="font-bold text-slate-900 text-sm">${c} Chapter</h3>
+              <span class="badge bg-amber-50 text-amber-800 border border-amber-200 font-bold">${groupedByCountry[c].length} Alumni</span>
             </div>
-          `).join('')}
-        </div>
-      `;
+            <ul class="space-y-2">
+              ${groupedByCountry[c].map(a => `<li class="p-2 rounded bg-slate-50 flex items-center justify-between text-xs">
+                <div><p class="font-semibold text-slate-900">${a.name}</p><p class="text-slate-500">${a.designation} • ${a.company}</p></div>
+                <button onclick="openConnectModal('${a.id}')" class="text-[11px] bg-white border border-slate-200 px-2 py-1 rounded">Connect</button>
+              </li>`).join('')}
+            </ul>
+          </div>
+        `).join('')}
+      </div>`;
     }
 
-    function openModal(id) {
-      document.getElementById(id).classList.remove('hidden');
-    }
-
-    function closeModal(id) {
-      document.getElementById(id).classList.add('hidden');
-    }
+    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
     function openConnectModal(id) {
       const alumnus = alumniData.find(a => a.id === id);
@@ -811,21 +599,22 @@
 
     function handleConnectSubmit(e) {
       e.preventDefault();
-      const intent = document.getElementById('connectIntent').value;
-      const sender = document.getElementById('connectSender').value;
-      const contact = document.getElementById('connectContact').value;
-      const message = document.getElementById('connectMessage').value;
-
-      alert(`Invitation draft created for ${selectedAlumnus.name}!\n\nTopic: ${intent}\nSender: ${sender}\nContact: ${contact}\n\nIn the live production web app, this automatically notifies the alumnus via their registered email/LinkedIn.`);
+      alert(`Invitation draft created for ${selectedAlumnus.name}! Automatically notifies the alumnus via their registered email/LinkedIn.`);
       closeModal('connectModal');
+    }
+
+    function handleAdmissionRequest(e) {
+      e.preventDefault();
+      const aName = document.getElementById('admAlumniName').value;
+      const sName = document.getElementById('admStudentName').value;
+      const rel = document.getElementById('admRelation').value;
+      const target = document.getElementById('admTargetInst').value;
+      alert(`KLS Admission Guidance Request Submitted!\n\nAlumnus: ${aName}\nApplicant: ${sName} (${rel})\nTarget: ${target}\n\nThis request has been recorded for Department Endorsement and forwarding to KLS Management / Admission Cell.`);
+      closeModal('admissionModal');
     }
 
     async function handleRegisterSubmit(e) {
       e.preventDefault();
-      const btn = document.getElementById('btnSubmitReg');
-      btn.textContent = 'Saving...';
-      btn.disabled = true;
-
       const newAlumnus = {
         id: 'alumni-' + Date.now(),
         name: document.getElementById('regName').value,
@@ -839,8 +628,7 @@
         linkedin: document.getElementById('regLinkedin').value,
         domain: document.getElementById('regDomain').value,
         canMentor: document.getElementById('regMentor').checked,
-        canGiveTalk: document.getElementById('regTalk').checked,
-        pastEvent: 'Registered via Alumni Connect Web App'
+        canGiveTalk: document.getElementById('regTalk').checked
       };
 
       alumniData.unshift(newAlumnus);
@@ -857,15 +645,10 @@
             headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify(newAlumnus)
           });
-        } catch(err) {
-          console.warn('Background sync error', err);
-        }
+        } catch(err) { console.warn('Background sync error', err); }
       }
-
-      btn.textContent = 'Submit Registration';
-      btn.disabled = false;
       closeModal('registerModal');
-      alert(`Welcome to the KLS GIT ISE Alumni Network, ${newAlumnus.name}! Your profile has been added.`);
+      alert(`Welcome to the KLS GIT ISE Alumni Network, ${newAlumnus.name}!`);
     }
 
     function exportData() {
