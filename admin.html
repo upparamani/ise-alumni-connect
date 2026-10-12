@@ -5,18 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KLS GIT ISE - Faculty & Admin Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <footer class="bg-slate-900 text-slate-400 text-xs py-5 border-t border-slate-800 mt-auto">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
-      <div>
-        <p class="text-white font-medium">Department of Information Science & Engineering (ISE) — Faculty Administration</p>
-        <p>KLS Gogte Institute of Technology, Udyambag, Belagavi - 590008, Karnataka, India</p>
+    <!-- Professionally Designed Institutional Admin Ribbon -->
+  <footer class="bg-gradient-to-r from-slate-900 via-brand-950 to-slate-900 text-slate-300 border-t border-slate-800 shadow-xl mt-auto py-5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-5">
+        
+        <!-- Left: Department & Autonomous Institute Attribution -->
+        <div class="text-center md:text-left">
+          <div class="flex items-center justify-center md:justify-start gap-2 mb-1">
+            <span class="text-[11px] font-bold text-amber-400 uppercase tracking-wider bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">Faculty Administration</span>
+            <span class="text-xs text-slate-400">Strictly Confidential Desk</span>
+          </div>
+          <h3 class="text-white font-bold text-sm tracking-tight">KLS Gogte Institute of Technology — Dept. of Information Science & Engineering</h3>
+          <p class="text-xs text-slate-400">Jnana Ganga, Udyambag, Belagavi - 590008, Karnataka, India</p>
+        </div>
+
+        <!-- Right: Professional Branded Gateway Cards for AlmaConnect & Alumni Cell -->
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <a href="https://2025.git.edu/alumni/" target="_blank" class="group bg-white/5 hover:bg-amber-400/10 border border-amber-400/30 hover:border-amber-400/60 text-amber-300 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-2 shadow-sm">
+            <span class="text-base group-hover:scale-110 transition-transform">🏛️</span>
+            <span>KLS GIT Alumni Cell</span>
+            <span class="text-amber-400/70 text-[10px]">&rarr;</span>
+          </a>
+
+          <a href="https://gitbelgaum.almaconnect.com/" target="_blank" class="group bg-white/5 hover:bg-blue-400/10 border border-blue-400/30 hover:border-blue-400/60 text-blue-300 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-2 shadow-sm">
+            <span class="text-base group-hover:scale-110 transition-transform">🌐</span>
+            <span>GIT AlmaConnect</span>
+            <span class="text-blue-400/70 text-[10px]">&rarr;</span>
+          </a>
+
+          <div class="h-6 w-px bg-slate-800 hidden sm:block"></div>
+
+          <a href="index.html" class="bg-brand-700/60 hover:bg-brand-700 text-white border border-blue-400/40 px-3 py-2 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5">
+            <span>&larr;</span>
+            <span>Public Alumni Portal</span>
+          </a>
+        </div>
       </div>
-      <div class="flex flex-wrap items-center gap-3 sm:gap-4">
-        <a href="https://2025.git.edu/alumni/" target="_blank" class="text-amber-400 hover:text-amber-300 hover:underline">KLS GIT Alumni Cell</a>
-        <span>•</span>
-        <a href="https://gitbelgaum.almaconnect.com/" target="_blank" class="text-amber-400 hover:text-amber-300 hover:underline">AlmaConnect</a>
-        <span>•</span>
-        <a href="index.html" class="text-blue-300 hover:text-white font-semibold flex items-center gap-1">&larr; Public Alumni Portal</a>
+
+      <!-- Bottom Sub-line -->
+      <div class="mt-4 pt-3.5 border-t border-slate-800/70 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-slate-500 text-center sm:text-left">
+        <p>© 2026 KLS GIT Dept. of Information Science & Engineering. All rights reserved.</p>
+        <p class="text-slate-400">Department Administration System • Connected to Central Alumni Database</p>
       </div>
     </div>
   </footer>
@@ -196,6 +226,27 @@
       </div>
     </div>
 
+        <!-- Self-Service Alumni Update Requests & Verification Queue -->
+    <div id="pendingUpdatesSection" class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+      <div class="pb-3 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+        <div>
+          <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
+            <span>📥 Self-Service Submissions & Update Requests</span>
+            <span id="pending-count" class="badge bg-amber-100 text-amber-800 text-xs font-bold">0 Pending</span>
+          </h2>
+          <p class="text-xs text-slate-500">Alumni who submit role/location changes without admin login are safely held here to prevent arbitrary public tampering with master records.</p>
+        </div>
+        <button onclick="renderPendingUpdates()" class="self-start sm:self-auto text-xs text-brand-600 hover:text-brand-800 font-semibold flex items-center gap-1">
+          🔄 Refresh Queue
+        </button>
+      </div>
+
+      <div id="pendingUpdatesList" class="mt-4 space-y-3">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+
+    <!-- Master Unredacted Alumni Records -->
     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
       <div class="pb-3 border-b border-slate-100 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
         <div>
@@ -346,6 +397,98 @@
       }
     };
 
+
+    function renderPendingUpdates() {
+      const container = document.getElementById('pendingUpdatesList');
+      const badge = document.getElementById('pending-count');
+      if (!container || !badge) return;
+
+      const pending = JSON.parse(localStorage.getItem('kls_ise_pending_updates') || '[]');
+      badge.textContent = `${pending.length} Pending`;
+
+      if (pending.length === 0) {
+        container.innerHTML = `
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-center text-xs text-slate-500">
+            ✅ No pending update requests. Verified directory entries remain protected from arbitrary tampering.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = pending.map((req, idx) => `
+        <div class="p-3.5 rounded-xl border border-amber-200 bg-amber-50/60 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-slate-900 text-sm">${req.submittedName}</span>
+              <span class="badge bg-amber-200 text-amber-900 text-[10px] font-bold">Update Request</span>
+              <span class="text-slate-500 text-[11px]">Submitted: ${req.submittedAt || 'Recent'}</span>
+            </div>
+            <p class="text-slate-700">
+              <strong>Target Master Profile:</strong> ${req.existingName} (USN: ${req.usn || 'Not provided'} • Batch: ${req.batch || '-'})
+            </p>
+            <div class="text-slate-600 bg-white/80 p-2 rounded border border-amber-200/60 font-mono text-[11px]">
+              <div>🏢 New Role & Org: <strong>${req.newDesignation}</strong> at <strong>${req.newCompany}</strong></div>
+              <div>📍 Location: ${req.newCity}, ${req.newCountry} | 📞 ${req.newPhone} | ✉️ ${req.newEmail}</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 self-end md:self-center flex-shrink-0">
+            <button onclick="approveUpdateRequest(${idx})" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-3 py-1.5 rounded-lg text-xs shadow-xs transition">
+              ✅ Approve & Merge
+            </button>
+            <button onclick="dismissUpdateRequest(${idx})" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold px-2.5 py-1.5 rounded-lg text-xs transition">
+              Dismiss
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function approveUpdateRequest(idx) {
+      const pending = JSON.parse(localStorage.getItem('kls_ise_pending_updates') || '[]');
+      const req = pending[idx];
+      if (!req) return;
+
+      const targetIdx = alumniData.findIndex(a => a.id === req.targetAlumnusId || a.name.toLowerCase() === req.existingName.toLowerCase());
+      if (targetIdx !== -1) {
+        alumniData[targetIdx] = {
+          ...alumniData[targetIdx],
+          actualName: req.submittedName || alumniData[targetIdx].actualName,
+          name: req.privacy === 'SEMI' ? `Alumnus (Batch ${req.batch || alumniData[targetIdx].batch})` : req.submittedName,
+          usn: req.usn || alumniData[targetIdx].usn,
+          designation: req.newDesignation || alumniData[targetIdx].designation,
+          company: req.newCompany || alumniData[targetIdx].company,
+          city: req.newCity || alumniData[targetIdx].city,
+          country: req.newCountry || alumniData[targetIdx].country,
+          phone: req.newPhone || alumniData[targetIdx].phone,
+          email: req.newEmail || alumniData[targetIdx].email,
+          domain: req.newDomain || alumniData[targetIdx].domain,
+          linkedin: req.newLinkedin || alumniData[targetIdx].linkedin,
+          isPrivate: req.privacy === 'STEALTH',
+          isSemiAnon: req.privacy === 'SEMI',
+          canMentor: req.canMentor,
+          canGiveTalk: req.canGiveTalk
+        };
+
+        localStorage.setItem('kls_git_ise_alumni', JSON.stringify(alumniData));
+        renderAdminTable();
+        populateInviteDropdown();
+      }
+
+      pending.splice(idx, 1);
+      localStorage.setItem('kls_ise_pending_updates', JSON.stringify(pending));
+      renderPendingUpdates();
+      alert(`Update approved! Master record for "${req.submittedName}" has been updated.`);
+    }
+
+    function dismissUpdateRequest(idx) {
+      if (confirm('Are you sure you want to dismiss this update submission without altering master records?')) {
+        const pending = JSON.parse(localStorage.getItem('kls_ise_pending_updates') || '[]');
+        pending.splice(idx, 1);
+        localStorage.setItem('kls_ise_pending_updates', JSON.stringify(pending));
+        renderPendingUpdates();
+      }
+    }
+
     function initAdmin() {
       loadFeatureToggles();
       const stored = localStorage.getItem('kls_git_ise_alumni');
@@ -356,6 +499,7 @@
       }
       populateInviteDropdown();
       renderAdminTable();
+      renderPendingUpdates();
       updateInviteTemplate();
     }
 
