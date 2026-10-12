@@ -209,7 +209,7 @@
     </div>
   </div>
 
-    <div id="registerModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+      <div id="registerModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl relative border border-slate-100 max-h-[92vh] overflow-y-auto">
       <button onclick="closeModal('registerModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-lg">✕</button>
       
@@ -218,48 +218,62 @@
           <img src="data:image/png;base64,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" alt="KLS Logo" class="h-9 w-auto object-contain" />
           <div class="h-6 w-px bg-slate-200"></div>
         <div>
-          <h3 id="modalTitle" class="font-bold text-slate-900 text-lg">ISE Alumni Registration & Update Portal</h3>
-          <p id="modalSubTitle" class="text-xs text-slate-500">Register new alumnus profile or update your existing post, company, place, and contacts.</p>
+          <h3 class="font-bold text-slate-900 text-lg leading-tight">Official ISE Alumni Registration</h3>
+          <p class="text-xs text-slate-500">Department of Information Science & Engineering • Global Alumni Network</p>
         </div>
       </div>
 
-      <!-- Mode Switch: New Registration vs Update Listed Profile -->
-      <div class="flex items-center gap-2 mb-3.5 p-1 bg-slate-100 rounded-lg text-xs font-semibold">
-        <button type="button" id="tabNewReg" onclick="setRegMode('new')" class="flex-1 py-1.5 rounded-md bg-white text-brand-700 shadow-sm transition">
-          ➕ New Registration
-        </button>
-        <button type="button" id="tabUpdateReg" onclick="setRegMode('update')" class="flex-1 py-1.5 rounded-md text-slate-600 hover:text-slate-900 transition">
-          ✏️ Update Listed Profile (Change Post / Place / Contact)
-        </button>
-      </div>
-
-      <div id="selectAlumniContainer" class="hidden mb-3.5 p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs space-y-1">
-        <label class="block font-bold text-amber-900">Select Your Listed Profile to Load & Edit:</label>
-        <select id="existingAlumniSelect" onchange="loadAlumniForUpdate(this.value)" class="w-full border border-amber-300 rounded-lg p-2 bg-white text-slate-900 font-medium">
-          <option value="">-- Choose your name from directory --</option>
-        </select>
-        <p class="text-[11px] text-amber-800">Selecting your name automatically populates your current record. Update your new organization, job title, city, or phone below and save.</p>
+      <!-- Anti-Tampering & Self-Service Information Banner -->
+      <div class="p-3 bg-blue-50/80 border border-blue-200 rounded-xl text-xs text-blue-950 flex items-start gap-2.5 mb-4">
+        <span class="text-base flex-shrink-0">🛡️</span>
+        <div class="leading-relaxed">
+          <strong class="font-bold text-blue-950">Self-Service Submission & Profile Integrity:</strong>
+          <p class="text-blue-900 mt-0.5">Alumni can register new profiles or submit updated professional details without administrative login. To protect directory data from unauthorized tampering, submissions matching already-verified alumni are securely captured and routed to department coordinators for verification before modifying master records.</p>
+        </div>
       </div>
 
       <form id="registerForm" onsubmit="handleRegisterSubmit(event)">
-        <input type="hidden" id="regEditId" value="" />
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
           <div class="sm:col-span-2">
             <label class="block font-semibold text-slate-700 mb-1">Full Name *</label>
-            <input type="text" id="regName" class="w-full border border-slate-300 rounded-lg p-2" required />
+            <input type="text" id="regName" placeholder="Enter your full name" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500 outline-none" required />
           </div>
-          <div><label class="block font-semibold text-slate-700 mb-1">USN</label><input type="text" id="regUSN" placeholder="e.g., 2GI15IS001" class="w-full border border-slate-300 rounded-lg p-2" /></div>
-          <div><label class="block font-semibold text-slate-700 mb-1">Graduation Batch *</label><input type="text" id="regBatch" placeholder="e.g., 2017-2021" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
-          <div><label class="block font-semibold text-slate-700 mb-1">Job Title / Designation / Post *</label><input type="text" id="regTitle" placeholder="e.g., Tech Lead / Entrepreneur / Researcher" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
-          <div><label class="block font-semibold text-slate-700 mb-1">Organization / Enterprise *</label><input type="text" id="regCompany" placeholder="e.g., Pelatro / Belagavi Foundry / Self" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
-          <div><label class="block font-semibold text-slate-700 mb-1">City / Current Place *</label><input type="text" id="regCity" placeholder="Belagavi / Hubballi / Sydney" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
-          <div><label class="block font-semibold text-slate-700 mb-1">Country *</label><input type="text" id="regCountry" placeholder="India / Netherlands / Australia" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
-          <div><label class="block font-semibold text-slate-700 mb-1">Contact Phone / WhatsApp *</label><input type="text" id="regPhone" placeholder="Mobile number" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
-          <div><label class="block font-semibold text-slate-700 mb-1">Email Address *</label><input type="email" id="regEmail" placeholder="your.email@example.com" class="w-full border border-slate-300 rounded-lg p-2" required /></div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">USN (University Seat Number)</label>
+            <input type="text" id="regUSN" placeholder="e.g., 2GI15IS001" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500 outline-none" />
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Graduation Batch *</label>
+            <input type="text" id="regBatch" placeholder="e.g., 2017-2021" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500 outline-none" required />
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Job Title / Designation / Post *</label>
+            <input type="text" id="regTitle" placeholder="e.g., Tech Lead / Entrepreneur / Researcher" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500 outline-none" required />
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Organization / Enterprise *</label>
+            <input type="text" id="regCompany" placeholder="e.g., Pelatro / Belagavi Foundry / Self" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500 outline-none" required />
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">City / Current Place *</label>
+            <input type="text" id="regCity" placeholder="Belagavi / Hubballi / Sydney" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500 outline-none" required />
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Country *</label>
+            <input type="text" id="regCountry" placeholder="India / Netherlands / Australia" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500 outline-none" required />
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Contact Phone / WhatsApp *</label>
+            <input type="text" id="regPhone" placeholder="Mobile number" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500 outline-none font-mono" required />
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Email Address *</label>
+            <input type="email" id="regEmail" placeholder="your.email@example.com" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500 outline-none font-mono" required />
+          </div>
 
           <div class="sm:col-span-2">
             <label class="block font-semibold text-slate-700 mb-1">Professional Sector / Domain *</label>
-            <select id="regDomainCategory" class="w-full border border-slate-300 rounded-lg p-2" required>
+            <select id="regDomainCategory" class="w-full border border-slate-300 rounded-lg p-2 bg-white focus:ring-2 focus:ring-brand-500 outline-none" required>
               <option value="Software, Cloud & AI Engineering">Software Engineering, Cloud & AI</option>
               <option value="Industrial Manufacturing & Foundry IoT">Industrial Manufacturing & Foundry IoT (Local Industry)</option>
               <option value="Agri-Tech & Rural Business">Agri-Tech, Smart Agriculture & Food Logistics</option>
@@ -268,26 +282,33 @@
             </select>
           </div>
 
-          <div class="sm:col-span-2"><label class="block font-semibold text-slate-700 mb-1">LinkedIn Profile (Optional)</label><input type="url" id="regLinkedin" placeholder="https://linkedin.com/in/..." class="w-full border border-slate-300 rounded-lg p-2" /></div>
+          <div class="sm:col-span-2">
+            <label class="block font-semibold text-slate-700 mb-1">LinkedIn Profile (Optional)</label>
+            <input type="url" id="regLinkedin" placeholder="https://linkedin.com/in/..." class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500 outline-none" />
+          </div>
           
-          <div class="sm:col-span-2 bg-slate-50 p-3 rounded-lg border border-slate-200 space-y-1.5">
-            <p class="font-semibold text-slate-800">🛡️ Privacy & Directory Visibility:</p>
+          <div class="sm:col-span-2 bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1.5">
+            <p class="font-semibold text-slate-800">🛡️ Directory Privacy & Visibility Preferences:</p>
             <div class="space-y-1">
-              <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="privacyOption" value="PUBLIC" checked class="w-4 h-4 text-brand-600" /><span><strong>Public Profile:</strong> Visible to everyone in the directory.</span></label>
-              <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="privacyOption" value="SEMI" class="w-4 h-4 text-brand-600" /><span><strong>Semi-Anonymous:</strong> Shows as "Alumnus (Batch X)" with company/skills, but hides your name.</span></label>
+              <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="privacyOption" value="PUBLIC" checked class="w-4 h-4 text-brand-600" /><span><strong>Public Profile:</strong> Visible to everyone in the alumni directory.</span></label>
+              <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="privacyOption" value="SEMI" class="w-4 h-4 text-brand-600" /><span><strong>Semi-Anonymous:</strong> Displays as "Alumnus (Batch X)" with company/domain, hiding name & LinkedIn.</span></label>
               <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="privacyOption" value="STEALTH" class="w-4 h-4 text-brand-600" /><span><strong>Stealth / Confidential:</strong> Hidden from directory; recorded only with faculty coordinators.</span></label>
             </div>
           </div>
 
-          <div class="sm:col-span-2 bg-slate-50 p-2.5 rounded-lg border border-slate-200 space-y-1">
-            <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="regMentor" checked class="w-4 h-4 text-brand-600 rounded" /><span>Willing to mentor ISE students</span></label>
-            <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="regTalk" checked class="w-4 h-4 text-brand-600 rounded" /><span>Willing to deliver online webinars</span></label>
-            <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="regInPerson" checked class="w-4 h-4 text-brand-600 rounded" /><span>Available for campus visits (50/100 Km Club)</span></label>
+          <div class="sm:col-span-2 bg-slate-50 p-2.5 rounded-xl border border-slate-200 space-y-1">
+            <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="regMentor" checked class="w-4 h-4 text-brand-600 rounded" /><span>Willing to mentor ISE engineering students</span></label>
+            <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="regTalk" checked class="w-4 h-4 text-brand-600 rounded" /><span>Willing to deliver online technical webinars</span></label>
+            <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="regInPerson" checked class="w-4 h-4 text-brand-600 rounded" /><span>Available for campus visits & workshops (50/100 Km Club)</span></label>
           </div>
         </div>
-        <div class="mt-4 flex justify-end gap-2">
-          <button type="button" onclick="closeModal('registerModal')" class="px-4 py-2 font-medium text-slate-600 hover:bg-slate-100 rounded-lg">Cancel</button>
-          <button type="submit" id="btnSubmitReg" class="px-4 py-2 font-semibold bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-lg">Submit Registration</button>
+        
+        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
+          <span class="text-[11px] text-slate-500">🔒 Data protected under KLS GIT Alumni Policy</span>
+          <div class="flex items-center gap-2">
+            <button type="button" onclick="closeModal('registerModal')" class="px-4 py-2 font-medium text-slate-600 hover:bg-slate-100 rounded-lg">Cancel</button>
+            <button type="submit" id="btnSubmitReg" class="px-4 py-2 font-semibold bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-lg shadow-sm transition">Submit Details</button>
+          </div>
         </div>
       </form>
     </div>
@@ -616,89 +637,14 @@
     function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
     function openRegisterModal() {
-      setRegMode('new');
-      document.getElementById('regEditId').value = '';
       document.getElementById('registerForm').reset();
       openModal('registerModal');
     }
 
-    function openEditAlumniModal(id) {
-      setRegMode('update');
-      openModal('registerModal');
-      populateExistingAlumniDropdown();
-      document.getElementById('existingAlumniSelect').value = id;
-      loadAlumniForUpdate(id);
-    }
-
-    function setRegMode(mode) {
-      const isUpdate = (mode === 'update');
-      const tabNew = document.getElementById('tabNewReg');
-      const tabUpd = document.getElementById('tabUpdateReg');
-      if (tabNew && tabUpd) {
-        tabNew.className = !isUpdate ? 'flex-1 py-1.5 rounded-md bg-white text-brand-700 shadow-sm font-bold transition' : 'flex-1 py-1.5 rounded-md text-slate-600 hover:text-slate-900 font-semibold transition';
-        tabUpd.className = isUpdate ? 'flex-1 py-1.5 rounded-md bg-white text-brand-700 shadow-sm font-bold transition' : 'flex-1 py-1.5 rounded-md text-slate-600 hover:text-slate-900 font-semibold transition';
-      }
-      const selBox = document.getElementById('selectAlumniContainer');
-      if (selBox) selBox.classList.toggle('hidden', !isUpdate);
-      
-      document.getElementById('modalTitle').textContent = isUpdate ? 'Update Alumni Profile (Change Place / Post / Contacts)' : 'ISE Alumni Registration Form';
-      document.getElementById('modalSubTitle').textContent = isUpdate ? 'Update your current post, organization, city/country, phone, or mentoring availability.' : 'Join the KLS GIT ISE global alumni directory and connect with your department.';
-      document.getElementById('btnSubmitReg').textContent = isUpdate ? 'Save Profile Changes' : 'Submit Registration';
-      
-      if (isUpdate) populateExistingAlumniDropdown();
-    }
-
-    function populateExistingAlumniDropdown() {
-      const sel = document.getElementById('existingAlumniSelect');
-      if (!sel) return;
-      const cur = sel.value;
-      sel.innerHTML = '<option value="">-- Choose your name from directory --</option>' + 
-        alumniData.map(a => `<option value="${a.id}">${a.actualName || a.name} (${a.designation || 'Alumnus'} at ${a.company || 'Org'} • ${a.city || ''})</option>`).join('');
-      if (cur) sel.value = cur;
-    }
-
-    function loadAlumniForUpdate(id) {
-      if (!id) return;
-      const a = alumniData.find(x => x.id === id);
-      if (!a) return;
-      document.getElementById('regEditId').value = a.id;
-      document.getElementById('regName').value = a.actualName || a.name;
-      document.getElementById('regUSN').value = a.usn || '';
-      document.getElementById('regBatch').value = a.batch || '';
-      document.getElementById('regTitle').value = a.designation || '';
-      document.getElementById('regCompany').value = a.company || '';
-      document.getElementById('regCity').value = a.city || '';
-      document.getElementById('regCountry').value = a.country || '';
-      document.getElementById('regPhone').value = a.phone || '';
-      document.getElementById('regEmail').value = a.email || '';
-      document.getElementById('regLinkedin').value = a.linkedin || '';
-      
-      if (a.domain) {
-        const domSelect = document.getElementById('regDomainCategory');
-        for (let opt of domSelect.options) {
-          if (a.domain.toLowerCase().includes(opt.value.toLowerCase().slice(0, 10))) {
-            domSelect.value = opt.value;
-            break;
-          }
-        }
-      }
-      document.getElementById('regMentor').checked = !!a.canMentor;
-      document.getElementById('regTalk').checked = !!a.canGiveTalk;
-      const privRadios = document.getElementsByName('privacyOption');
-      for (let r of privRadios) {
-        if (a.isPrivate && r.value === 'STEALTH') r.checked = true;
-        else if (a.isSemiAnon && r.value === 'SEMI') r.checked = true;
-        else if (!a.isPrivate && !a.isSemiAnon && r.value === 'PUBLIC') r.checked = true;
-      }
-    }
-
     async function handleRegisterSubmit(e) {
       e.preventDefault();
-      const editId = document.getElementById('regEditId').value;
-      const privacy = document.querySelector('input[name="privacyOption"]:checked').value;
-      const isPrivate = (privacy === 'STEALTH');
-      const isSemiAnon = (privacy === 'SEMI');
       const rawName = document.getElementById('regName').value.trim();
+      const usn = document.getElementById('regUSN').value.trim();
       const batch = document.getElementById('regBatch').value.trim();
       const designation = document.getElementById('regTitle').value.trim();
       const company = document.getElementById('regCompany').value.trim();
@@ -707,87 +653,72 @@
       const phone = document.getElementById('regPhone').value.trim();
       const email = document.getElementById('regEmail').value.trim();
       const domain = document.getElementById('regDomainCategory').value;
-      const linkedin = isSemiAnon ? '' : document.getElementById('regLinkedin').value.trim();
+      const linkedin = document.getElementById('regLinkedin').value.trim();
+      const privacy = document.querySelector('input[name="privacyOption"]:checked').value;
+      const isPrivate = (privacy === 'STEALTH');
+      const isSemiAnon = (privacy === 'SEMI');
       const canMentor = document.getElementById('regMentor').checked;
       const canGiveTalk = document.getElementById('regTalk').checked;
 
-      // 1. If explicit edit of an existing record
-      if (editId) {
-        const idx = alumniData.findIndex(a => a.id === editId);
-        if (idx !== -1) {
-          alumniData[idx] = {
-            ...alumniData[idx],
-            name: isSemiAnon ? `Alumnus (Batch ${batch})` : rawName,
-            actualName: rawName,
-            usn: document.getElementById('regUSN').value.trim() || alumniData[idx].usn,
-            batch: batch,
-            passoutYear: batch.split('-')[1]?.trim() || '',
-            designation: designation,
-            company: company,
-            city: city,
-            country: country,
-            phone: phone,
-            email: email,
-            domain: domain,
-            linkedin: linkedin,
-            isPrivate: isPrivate,
-            isSemiAnon: isSemiAnon,
-            canMentor: canMentor,
-            canGiveTalk: canGiveTalk
-          };
-          saveData();
-          populateBatchFilter();
-          render();
-          closeModal('registerModal');
-          alert(`Profile updated successfully! Updated post, company, and location for "${rawName}" are now live on the portal.`);
-          return;
-        }
-      }
-
-      // 2. Prevent duplicate creation if an existing alumnus has the same name or USN
-      const matchIdx = alumniData.findIndex(a => 
+      // 1. Anti-Tampering Integrity Check: Does this match an already verified alumnus?
+      const existingMatch = alumniData.find(a => 
         (a.actualName && a.actualName.toLowerCase() === rawName.toLowerCase()) || 
         (a.name && a.name.toLowerCase() === rawName.toLowerCase()) ||
-        (document.getElementById('regUSN').value && a.usn && a.usn.toLowerCase() === document.getElementById('regUSN').value.trim().toLowerCase())
+        (usn && a.usn && a.usn.toLowerCase() === usn.toLowerCase())
       );
 
-      if (matchIdx !== -1) {
-        if (confirm(`A record for "${rawName}" is already listed in the directory. Would you like to UPDATE that profile with your new role and location details?`)) {
-          alumniData[matchIdx] = {
-            ...alumniData[matchIdx],
-            name: isSemiAnon ? `Alumnus (Batch ${batch})` : rawName,
-            actualName: rawName,
-            usn: document.getElementById('regUSN').value.trim() || alumniData[matchIdx].usn,
-            batch: batch,
-            passoutYear: batch.split('-')[1]?.trim() || '',
-            designation: designation,
-            company: company,
-            city: city,
-            country: country,
-            phone: phone,
-            email: email,
-            domain: domain,
-            linkedin: linkedin,
-            isPrivate: isPrivate,
-            isSemiAnon: isSemiAnon,
-            canMentor: canMentor,
-            canGiveTalk: canGiveTalk
-          };
-          saveData();
-          populateBatchFilter();
-          render();
-          closeModal('registerModal');
-          alert(`Existing profile for "${rawName}" has been updated successfully!`);
-          return;
+      if (existingMatch) {
+        // Anti-tampering protection: Record is captured as a verified update submission
+        // rather than allowing arbitrary public overwriting of verified directory data!
+        const updateRequest = {
+          id: 'upd-' + Date.now(),
+          targetAlumnusId: existingMatch.id,
+          existingName: existingMatch.actualName || existingMatch.name,
+          submittedName: rawName,
+          usn: usn || existingMatch.usn || '',
+          batch: batch || existingMatch.batch || '',
+          newDesignation: designation,
+          newCompany: company,
+          newCity: city,
+          newCountry: country,
+          newPhone: phone,
+          newEmail: email,
+          newDomain: domain,
+          newLinkedin: isSemiAnon ? '' : linkedin,
+          privacy: privacy,
+          canMentor: canMentor,
+          canGiveTalk: canGiveTalk,
+          submittedAt: new Date().toLocaleString()
+        };
+
+        const pendingUpdates = JSON.parse(localStorage.getItem('kls_ise_pending_updates') || '[]');
+        pendingUpdates.unshift(updateRequest);
+        localStorage.setItem('kls_ise_pending_updates', JSON.stringify(pendingUpdates));
+
+        if (APPS_SCRIPT_API_URL) {
+          try {
+            await fetch(APPS_SCRIPT_API_URL, {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+              body: JSON.stringify({ action: 'UPDATE_REQUEST', ...updateRequest })
+            });
+          } catch(err) { console.warn('API update sync', err); }
         }
+
+        closeModal('registerModal');
+        document.getElementById('registerForm').reset();
+        
+        alert(`🛡️ Self-Service Submission Captured!\n\nAn existing verified record for "${existingMatch.actualName || existingMatch.name}" is already listed in the ISE directory.\n\nTo protect alumni profiles from unauthorized tampering, your updated details (Role: ${designation} at ${company}, Location: ${city}) have been securely logged and forwarded to the ISE Faculty Coordinator for verification.\n\nPublic directory records remain safeguarded until coordinator confirmation.`);
+        return;
       }
 
-      // 3. New Alumnus registration
+      // 2. Capture New Alumnus Registration cleanly
       const newAlumnus = {
         id: 'alumni-' + Date.now(),
         name: isSemiAnon ? `Alumnus (Batch ${batch})` : rawName,
         actualName: rawName,
-        usn: document.getElementById('regUSN').value.trim(),
+        usn: usn,
         batch: batch,
         passoutYear: batch.split('-')[1]?.trim() || '',
         designation: designation,
@@ -797,11 +728,12 @@
         phone: phone,
         email: email,
         domain: domain,
-        linkedin: linkedin,
+        linkedin: isSemiAnon ? '' : linkedin,
         isPrivate: isPrivate,
         isSemiAnon: isSemiAnon,
         canMentor: canMentor,
-        canGiveTalk: canGiveTalk
+        canGiveTalk: canGiveTalk,
+        registeredAt: new Date().toISOString()
       };
 
       alumniData.unshift(newAlumnus);
@@ -815,13 +747,14 @@
             method: 'POST',
             mode: 'no-cors',
             headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-            body: JSON.stringify(newAlumnus)
+            body: JSON.stringify({ action: 'NEW_REGISTRATION', ...newAlumnus })
           });
         } catch(err) { console.warn('API error', err); }
       }
 
       closeModal('registerModal');
-      alert(`Registration Successful! Welcome ${rawName} to the KLS GIT ISE Alumni Network!`);
+      document.getElementById('registerForm').reset();
+      alert(`🎉 Registration Successful!\n\nWelcome ${rawName} to the KLS GIT ISE Global Alumni Network! Your details have been captured and added to the directory.`);
     }
 
     function exportData() {
