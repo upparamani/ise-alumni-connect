@@ -230,6 +230,84 @@
         </table>
       </div>
     </div>
+
+    <!-- Faculty Edit Alumnus Modal -->
+    <div id="adminEditModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+      <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative border border-slate-100 max-h-[92vh] overflow-y-auto text-xs">
+        <button onclick="closeAdminEditModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-lg">✕</button>
+        <div class="mb-4 pb-2 border-b border-slate-100">
+          <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+            <span>✏️ Edit Alumni Record</span>
+            <span id="adminEditBadge" class="text-xs font-normal text-slate-500"></span>
+          </h3>
+          <p class="text-slate-500 text-[11px]">Update post, enterprise, city/country, or direct contact phone/email for department records.</p>
+        </div>
+        
+        <form onsubmit="handleAdminSaveEdit(event)" class="space-y-3">
+          <input type="hidden" id="editAlumniId" />
+          <div class="grid grid-cols-2 gap-3">
+            <div class="col-span-2">
+              <label class="block font-semibold text-slate-700 mb-1">Full Name *</label>
+              <input type="text" id="editName" class="w-full border border-slate-300 rounded-lg p-2" required />
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">USN</label>
+              <input type="text" id="editUSN" class="w-full border border-slate-300 rounded-lg p-2" />
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Batch *</label>
+              <input type="text" id="editBatch" class="w-full border border-slate-300 rounded-lg p-2" required />
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Designation / Role / Post *</label>
+              <input type="text" id="editDesignation" class="w-full border border-slate-300 rounded-lg p-2" required />
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Company / Organization *</label>
+              <input type="text" id="editCompany" class="w-full border border-slate-300 rounded-lg p-2" required />
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">City / Location *</label>
+              <input type="text" id="editCity" class="w-full border border-slate-300 rounded-lg p-2" required />
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Country *</label>
+              <input type="text" id="editCountry" class="w-full border border-slate-300 rounded-lg p-2" required />
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Phone / WhatsApp</label>
+              <input type="text" id="editPhone" class="w-full border border-slate-300 rounded-lg p-2 font-mono" />
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Email Address</label>
+              <input type="email" id="editEmail" class="w-full border border-slate-300 rounded-lg p-2 font-mono" />
+            </div>
+            <div class="col-span-2">
+              <label class="block font-semibold text-slate-700 mb-1">Domain / Expertise Area</label>
+              <input type="text" id="editDomain" class="w-full border border-slate-300 rounded-lg p-2" />
+            </div>
+            <div class="col-span-2">
+              <label class="block font-semibold text-slate-700 mb-1">LinkedIn Profile</label>
+              <input type="url" id="editLinkedin" class="w-full border border-slate-300 rounded-lg p-2" />
+            </div>
+            <div class="col-span-2 bg-slate-50 p-2.5 rounded-lg border border-slate-200 flex gap-4">
+              <label class="flex items-center gap-1.5 cursor-pointer font-medium text-slate-700">
+                <input type="checkbox" id="editMentor" class="rounded text-brand-600" />
+                <span>Mentoring Volunteer</span>
+              </label>
+              <label class="flex items-center gap-1.5 cursor-pointer font-medium text-slate-700">
+                <input type="checkbox" id="editTalk" class="rounded text-brand-600" />
+                <span>Speaker Volunteer</span>
+              </label>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-slate-100 flex justify-end gap-2">
+            <button type="button" onclick="closeAdminEditModal()" class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg font-medium">Cancel</button>
+            <button type="submit" class="px-4 py-2 bg-brand-700 hover:bg-brand-800 text-white font-semibold rounded-lg shadow-sm">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </main>
 
   <script>
@@ -282,10 +360,10 @@
     }
 
     function loadFeatureToggles() {
-      const toggles = JSON.parse(localStorage.getItem('kls_ise_feature_toggles') || '{}');
-      document.getElementById('toggleReboot').checked = toggles.careerReboot === true;
-      document.getElementById('toggleAdmission').checked = toggles.admissionBenefits === true;
-      document.getElementById('togglePerks').checked = toggles.alumniPerks === true;
+      const toggles = JSON.parse(localStorage.getItem('kls_ise_feature_toggles') || '{"careerReboot":true,"admissionBenefits":true,"alumniPerks":true}');
+      document.getElementById('toggleReboot').checked = toggles.careerReboot !== false;
+      document.getElementById('toggleAdmission').checked = toggles.admissionBenefits !== false;
+      document.getElementById('togglePerks').checked = toggles.alumniPerks !== false;
     }
 
     function saveFeatureToggles() {
@@ -356,6 +434,64 @@
           </tr>
         `;
       }).join('');
+    }
+
+
+    function openAdminEditModal(id) {
+      const a = alumniData.find(x => x.id === id);
+      if (!a) return;
+      document.getElementById('editAlumniId').value = a.id;
+      document.getElementById('adminEditBadge').textContent = `(ID: ${a.id})`;
+      document.getElementById('editName').value = a.actualName || a.name;
+      document.getElementById('editUSN').value = a.usn || '';
+      document.getElementById('editBatch').value = a.batch || '';
+      document.getElementById('editDesignation').value = a.designation || '';
+      document.getElementById('editCompany').value = a.company || '';
+      document.getElementById('editCity').value = a.city || '';
+      document.getElementById('editCountry').value = a.country || 'India';
+      document.getElementById('editPhone').value = a.phone || '';
+      document.getElementById('editEmail').value = a.email || '';
+      document.getElementById('editDomain').value = a.domain || '';
+      document.getElementById('editLinkedin').value = a.linkedin || '';
+      document.getElementById('editMentor').checked = !!a.canMentor;
+      document.getElementById('editTalk').checked = !!a.canGiveTalk;
+      document.getElementById('adminEditModal').classList.remove('hidden');
+    }
+
+    function closeAdminEditModal() {
+      document.getElementById('adminEditModal').classList.add('hidden');
+    }
+
+    function handleAdminSaveEdit(e) {
+      e.preventDefault();
+      const id = document.getElementById('editAlumniId').value;
+      const idx = alumniData.findIndex(a => a.id === id);
+      if (idx === -1) return;
+
+      const rawName = document.getElementById('editName').value.trim();
+      alumniData[idx] = {
+        ...alumniData[idx],
+        name: rawName,
+        actualName: rawName,
+        usn: document.getElementById('editUSN').value.trim(),
+        batch: document.getElementById('editBatch').value.trim(),
+        designation: document.getElementById('editDesignation').value.trim(),
+        company: document.getElementById('editCompany').value.trim(),
+        city: document.getElementById('editCity').value.trim(),
+        country: document.getElementById('editCountry').value.trim(),
+        phone: document.getElementById('editPhone').value.trim(),
+        email: document.getElementById('editEmail').value.trim(),
+        domain: document.getElementById('editDomain').value.trim(),
+        linkedin: document.getElementById('editLinkedin').value.trim(),
+        canMentor: document.getElementById('editMentor').checked,
+        canGiveTalk: document.getElementById('editTalk').checked
+      };
+
+      localStorage.setItem('kls_git_ise_alumni', JSON.stringify(alumniData));
+      renderAdminTable();
+      populateInviteDropdown();
+      closeAdminEditModal();
+      alert(`Alumni record for "${rawName}" updated successfully! Changes are live.`);
     }
 
     function deleteAlumnus(id, name) {
