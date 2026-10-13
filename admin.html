@@ -491,7 +491,33 @@
       }
     }
 
+    
+    function deduplicateAlumniData() {
+      const seen = new Map();
+      const cleanList = [];
+      for (const item of alumniData) {
+        const key = (item.actualName || item.name || '').toLowerCase().trim();
+        if (!key) continue;
+        if (!seen.has(key)) {
+          seen.set(key, item);
+          cleanList.push(item);
+        } else {
+          const existing = seen.get(key);
+          if (item.isRegistered && !existing.isRegistered) {
+            Object.assign(existing, item);
+          } else {
+            for (const k in item) {
+              if (!existing[k] && item[k]) existing[k] = item[k];
+            }
+          }
+        }
+      }
+      alumniData = cleanList;
+      localStorage.setItem('kls_git_ise_alumni', JSON.stringify(alumniData));
+    }
+
     function initAdmin() {
+      deduplicateAlumniData();
       loadFeatureToggles();
       const stored = localStorage.getItem('kls_git_ise_alumni');
       if (stored) {
@@ -551,8 +577,11 @@
         return `
           <tr class="hover:bg-slate-50 transition">
             <td class="py-2.5 px-3">
-              <p class="font-bold text-slate-900">${item.name}</p>
-              <p class="text-[11px] text-slate-500">${item.usn ? `USN: ${item.usn}` : 'USN: Not provided'}</p>
+              <div class="flex items-center gap-1.5">
+                <p class="font-bold text-slate-900">${item.name}</p>
+                ${item.isRegistered ? '<span class="badge bg-emerald-100 text-emerald-800 text-[10px] font-bold">✅ Registered</span>' : '<span class="badge bg-slate-100 text-slate-500 text-[10px]">Seed</span>'}
+              </div>
+              <p class="text-[11px] text-slate-500">${item.usn ? `USN: ${item.usn}` : 'USN: Not provided'} ${item.username ? `• <span class="font-mono text-emerald-700 font-semibold">UN: ${item.username}</span>` : ''}</p>
             </td>
             <td class="py-2.5 px-3 font-semibold text-slate-700">${item.batch}</td>
             <td class="py-2.5 px-3">
@@ -721,7 +750,7 @@
     }
 
     function exportAdminCSV() {
-      const headers = ["Name", "USN", "Batch", "Designation", "Company", "City", "Country", "Phone", "Email", "Domain", "Mentor", "Speaker"];
+      const headers = ["Name", "USN", "Batch", "Designation", "Company", "City", "Country", "Phone", "Email", "Domain", "Mentor", "Speaker", "Registered_Status", "Username"];
       const rows = alumniData.map(a => [
         `"${a.name || ''}"`,
         `"${a.usn || ''}"`,
@@ -734,7 +763,9 @@
         `"${a.email || ''}"`,
         `"${a.domain || ''}"`,
         a.canMentor ? "YES" : "NO",
-        a.canGiveTalk ? "YES" : "NO"
+        a.canGiveTalk ? "YES" : "NO",
+        a.isRegistered ? "REGISTERED" : "UNREGISTERED",
+        `"${a.username || ''}"`
       ]);
 
       const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows.map(e => e.join(","))].join("\n");
